@@ -1,8 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
 import {Button, Modal, Checkbox} from 'antd'
-import "./instructions.css";
+import "./main.css";
 
-function InstructionsContainer() {
+function PracticeContainer() {
 
     const [agree, setAgree] = useState(false);
     const [task, setTask] = useState(0);
@@ -19,9 +19,8 @@ function InstructionsContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/Practice';
+        let path = '/#/Exp1Trial1';
         window.location.assign(path);
-        console.log('moving to practice page')
 
     }
 
@@ -42,25 +41,21 @@ function InstructionsContainer() {
 
     return (
       <div className="container">
-        <h1>Instructions</h1> 
+        <h1>Practice Trial</h1> 
 
         <div className="text"> 
-            Read the following instructions to complete the study:
-            <ol>
-                <li> Instruction No. 1</li>
-                <li> Instruction No. 2</li>
-            </ol> 
+            Use this time to practice using the tools for suturing. Once you finish, your sutures will be monitored and recorded in the next page.
         </div>
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
-                I understand the instructions of the study.
+                I am finished practicing.
             </Checkbox> 
         </div>
 
         <div className="text"> 
             <Button disabled={!agree} variant="btn btn-success" onClick={routeChange}>
-                Start
+                Start Trials
             </Button>
         </div>
 
@@ -68,4 +63,4 @@ function InstructionsContainer() {
       );
 }
 
-export default InstructionsContainer;
+export default PracticeContainer;

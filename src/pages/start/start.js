@@ -23,11 +23,11 @@ function StartContainer() {
       <div className="Home">
         <div className="lander">
             <h1>Study title here</h1>
-            <p> This is the start page. Welcome to our study. </p>
+            <p> Welcome to our study! </p>
 
-            <div>
+            <div style={{ marginBottom: "20px" }}>
                 <input type="checkbox" id="agree" onChange={checkboxHandler} />
-                <label htmlFor="agree"> I agree to the <b>terms and conditions</b></label>
+                <label htmlFor="agree"> I agree to the <b>terms and conditions</b> and consent to my participation in this study.</label>
             </div>
 
             <Button disabled={!agree} variant="btn btn-success" onClick={routeChange}>

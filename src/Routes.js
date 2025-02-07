@@ -4,8 +4,11 @@ import { HashRouter, Router, Switch, Route} from 'react-router-dom';
 
 import StartContainer from './pages/start/start';
 import InstructionsContainer from './pages/instr/instructions';
+import Exp1Trial1Container from "./pages/main/exp1-trial1";
+import Exp1Trial2Container from "./pages/main/exp1-trial2";
 import Main1Container from "./pages/main/main-task1";
 import Main2Container from "./pages/main/main-task2";
+import PracticeContainer from "./pages/main/practice";
 import SurveyContainer from "./pages/survey/survey"
 import EndContainer from "./pages/end/end";
 
@@ -17,6 +20,9 @@ export default class Routes extends Component {
                 <Switch>
                     <Route path="/" exact component={StartContainer} />
                     <Route path="/Instructions" component={InstructionsContainer} />
+                    <Route path="/Practice" component={PracticeContainer} />
+                    <Route path="/Exp1Trial1" component={Exp1Trial1Container} />
+                    <Route path="/Exp1Trial2" component={Exp1Trial2Container} />
                     <Route path="/Main1" component={Main1Container} />
                     <Route path="/Main2" component={Main2Container} />
                     <Route path="/Survey" component={SurveyContainer} />

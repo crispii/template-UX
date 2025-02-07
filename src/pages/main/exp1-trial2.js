@@ -1,8 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
 import {Button, Modal, Checkbox} from 'antd'
-import "./instructions.css";
+import "./main.css";
 
-function InstructionsContainer() {
+function Exp1Trial2Container() {
 
     const [agree, setAgree] = useState(false);
     const [task, setTask] = useState(0);
@@ -19,48 +19,42 @@ function InstructionsContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/Practice';
-        window.location.assign(path);
-        console.log('moving to practice page')
+        
 
     }
 
     // connect with the backend to randomize the task 
-    // useEffect(() => {
-    //     fetch('http://localhost:8080/setup')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         console.log(data['task_number']);
-    //         setTask(data['task_number']);
-    //         // send user id as well
-    //         localStorage.setItem('user-id', data['user_id']);
-    //         console.log(localStorage)
-    //     });
-    // }, []);
+    useEffect(() => {
+        fetch('http://localhost:8080/setup')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            console.log(data['task_number']);
+            setTask(data['task_number']);
+            // send user id as well
+            localStorage.setItem('user-id', data['user_id']);
+            console.log(localStorage)
+        });
+    }, []);
 
 
     return (
       <div className="container">
-        <h1>Instructions</h1> 
+        <h1>Experiment 1: Trial 2</h1> 
 
         <div className="text"> 
-            Read the following instructions to complete the study:
-            <ol>
-                <li> Instruction No. 1</li>
-                <li> Instruction No. 2</li>
-            </ol> 
+            You will now be conducting Trial 2. (Enter instructions for how to do this)
         </div>
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
-                I understand the instructions of the study.
+                I have finished Trial 2.
             </Checkbox> 
         </div>
 
         <div className="text"> 
             <Button disabled={!agree} variant="btn btn-success" onClick={routeChange}>
-                Start
+                Next
             </Button>
         </div>
 
@@ -68,4 +62,4 @@ function InstructionsContainer() {
       );
 }
 
-export default InstructionsContainer;
+export default Exp1Trial2Container;
