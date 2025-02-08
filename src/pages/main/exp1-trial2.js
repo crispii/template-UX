@@ -12,15 +12,13 @@ function Exp1Trial2Container() {
     }
 
     const routeChange = () =>{ 
-        // if (task % 2 === 0) {
-        //     let path = '/#/Main2'; 
-        //     window.location.assign(path);
-        // } else {
-        //     let path = '/#/Main1'; 
-        //     window.location.assign(path);
-        // }
-        
-
+        if (task % 2 === 0) {
+            let path = '/#/AI-Preface'; 
+            window.location.assign(path);
+        } else {
+            let path = '/#/Traditional-Preface'; 
+            window.location.assign(path);
+        }
     }
 
     // connect with the backend to randomize the task 

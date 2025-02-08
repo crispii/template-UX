@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import {Button, Modal, Checkbox} from 'antd'
 import "./feedback.css";
 
-function TraditionalContainer() {
+function TraditionalPrefaceContainer() {
 
     const [agree, setAgree] = useState(false);
     const [task, setTask] = useState(0);
@@ -19,9 +19,9 @@ function TraditionalContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/Practice';
+        let path = '/#/Traditional-Feedback';
         window.location.assign(path);
-        console.log('moving to practice page')
+        console.log('moving to traditional feedback page')
 
     }
 
@@ -42,21 +42,21 @@ function TraditionalContainer() {
 
     return (
       <div className="container">
-        <h1>Traditional Feedback</h1> 
+        <h1>Traditional Feedback Preface</h1> 
 
         <div className="text"> 
-            This will be traditional feedback.
+            The next page will be traditional feedback.
         </div>
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
-                See feedback
+                I understand that I will be receiving traditional feedback.
             </Checkbox> 
         </div>
 
         <div className="text"> 
             <Button disabled={!agree} variant="btn btn-success" onClick={routeChange}>
-                Start
+                See feedback
             </Button>
         </div>
 
@@ -64,4 +64,4 @@ function TraditionalContainer() {
       );
 }
 
-export default TraditionalContainer;
+export default TraditionalPrefaceContainer;

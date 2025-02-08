@@ -9,7 +9,7 @@ import {
   Button,
   Radio,
 } from 'antd';
-import './survey.css'
+import './rating.css'
 const { Option } = Select;
 
 
@@ -25,7 +25,7 @@ const formItemLayout = {
     },
 };
 
-const SurveyContainer = () => {
+const RateVideoContainer = () => {
   const [form] = Form.useForm();
   const [answers, setAnswers] = useState({});
 
@@ -41,7 +41,7 @@ const SurveyContainer = () => {
         q2: 2,
     };
     sendData(data)
-    let path = '/#/Rating'; 
+    let path = '/#/End'; 
     window.location.assign(path);
   };
 
@@ -70,8 +70,8 @@ const SurveyContainer = () => {
         }}
       >
 
-        <div className="title"> Study survey</div>
-        <div className='text'> This is how you can create a questionnaire at the end of the experiment. </div>
+        <div className="title"> Video Rating</div>
+        <div className='text'> Based on the performance in the video, rate the following skills </div>
 
         <Form.Item 
             name="Q1" 
@@ -82,11 +82,11 @@ const SurveyContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Very unconfident</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Unconfident</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Confident</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Very confident</Radio>
+                <Radio value="1" style={{fontSize: "18px"}}>Strongly agree</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Agree</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Disagree</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>Strongly disagree</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -121,4 +121,4 @@ const SurveyContainer = () => {
     </div>
   );
 };
-export default SurveyContainer;
+export default RateVideoContainer;
