@@ -19,9 +19,9 @@ function AIFeedbackContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/Exp2Trial1';
+        let path = '/#/Session2';
         window.location.assign(path);
-        console.log('moving to exp2 trial 1 page')
+        console.log('moving to session 2 page')
 
     }
 

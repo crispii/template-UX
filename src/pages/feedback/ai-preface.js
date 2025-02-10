@@ -50,7 +50,7 @@ function AIPrefaceContainer() {
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
-            I understand that I will be receiving traditional feedback.
+            I understand that I will be receiving AI feedback.
             </Checkbox> 
         </div>
 

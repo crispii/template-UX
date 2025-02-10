@@ -9,7 +9,7 @@ import {
   Button,
   Radio,
 } from 'antd';
-import './rating.css'
+import './survey.css'
 const { Option } = Select;
 
 
@@ -25,10 +25,25 @@ const formItemLayout = {
     },
 };
 
-const RateVideoContainer = () => {
+const DemographicsContainer = () => {
   const [form] = Form.useForm();
   const [answers, setAnswers] = useState({});
+  const [task, setTask] = useState(0);
 
+  // Fetch task number from backend
+  useEffect(() => {
+    const userId = localStorage.getItem("user-id");
+    
+    if (userId) {
+        fetch(`http://localhost:8080/setup?user_id=${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Fetched Task:', data);
+                setTask(Number(data.task_number)); // Set the task from the backend response
+            })
+            .catch(error => console.error('Error fetching task data:', error));
+    }
+  }, []);
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -37,14 +52,16 @@ const RateVideoContainer = () => {
     // save data
     let data = {
         user_id: localStorage.getItem("user-id"),
-        q1: 1, 
-        q2: 2,
+        q1: values.Q1, 
+        q2: values.Q2,
     };
     sendData(data)
-    let path = '/#/Demographics'; 
-    window.location.assign(path);
-  };
 
+    let path = '/#/End';
+    window.location.assign(path);
+    
+  };
+  // also connect with the backend to randomize the task 
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
@@ -55,6 +72,7 @@ const RateVideoContainer = () => {
     }).then(response => response.json())
       .then(message => {
         console.log(message)
+        
         // getLastestTodos();
       })
   } 
@@ -70,23 +88,22 @@ const RateVideoContainer = () => {
         }}
       >
 
-        <div className="title"> Video Rating</div>
-        <div className='text'> Based on the performance in the video, rate the following skills </div>
+        <div className="title"> Demographics Survey</div>
 
         <Form.Item 
             name="Q1" 
             label = {
-                <p style={{fontSize: "20px"}}> 1. How confident were you in your responses to complete the task?</p>}
+                <p style={{fontSize: "20px"}}> 1. What is your age range?</p>}
             rules={[{
                     required: true,
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Strongly agree</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Agree</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Disagree</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Strongly disagree</Radio>
+                <Radio value="1" style={{fontSize: "18px"}}>1</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>2</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>3</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>4</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>5</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -94,17 +111,17 @@ const RateVideoContainer = () => {
         <Form.Item 
             name="Q2" 
             label = {
-                <p style={{fontSize: "20px"}}> 2. How successful do you think you were you in accomplishing what you were asked to do? </p>}
+                <p style={{fontSize: "20px"}}> 2. What is your job? </p>}
             rules={[{
                     required: true,
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Poor</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Fair</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Good</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Excellent</Radio>
+                <Radio value="1" style={{fontSize: "18px"}}>doctor</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>student</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>1</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>2</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>3</Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -121,4 +138,4 @@ const RateVideoContainer = () => {
     </div>
   );
 };
-export default RateVideoContainer;
+export default DemographicsContainer;

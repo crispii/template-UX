@@ -5,7 +5,7 @@ import "./main.css";
 
 import PredictionContainer from '../../components/predictionContainer'
 
-function Session1Container() {
+function Session2Container() {
     const [task, setTask] = useState(0);
     const [tmpUser, setTmpUser] = useState(0);
     const [trialCount, setTrialCount] = useState(0);
@@ -23,8 +23,8 @@ function Session1Container() {
             const newCount = prevCount + 1;
     
             if (newCount >= totalTrials) {
-                console.log('done with trials for session 1');
-                let path = '/#/Survey';
+                console.log('done with trials for session 2');
+                let path = '/#/Survey2';
                 window.location.assign(path);
             } else {
                 // reinitialize variables
@@ -80,7 +80,7 @@ function Session1Container() {
 
     return (
             <div className="container">
-            <div className="title">Session 1</div>
+            <div className="title">Session 2</div>
             
 
             <div className="text">
@@ -108,4 +108,4 @@ function Session1Container() {
       );
 }
 
-export default Session1Container;
+export default Session2Container;

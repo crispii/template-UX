@@ -45,10 +45,26 @@ function InstructionsContainer() {
         <h1>Instructions</h1> 
 
         <div className="text"> 
-            Read the following instructions to complete the study:
+        <p>How to run a simple suture</p>
+
+        <p><strong>Tools Available:</strong> Scissors, needle holder, forceps, needles, and suture thread.</p>
+
+        <p><strong>Define:</strong></p>
+        <ul>
+            <li>Number of stitches</li>
+            <li>Parallel</li>
+            <li>Start and end with instrument tie</li>
+        </ul>
+
+        <p>You will complete four trials in two separate sessions.</p>
+
+        <p><strong>Steps:</strong></p> 
             <ol>
-                <li> Instruction No. 1</li>
-                <li> Instruction No. 2</li>
+                <li> Place your hand in the hand position holders </li>
+                <li> You will find the tools on the left (forceps) and right (needle holder, scissors, and needle with thread) </li>
+                <li> You will complete X sutures. The video recording will start and end for each one.</li>
+                <li> You will be presented with the first questionnaire after the first session.  </li>
+                <li> You will complete X more sutures. The video recording will start and end for each one. </li>
             </ol> 
         </div>
 

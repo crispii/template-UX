@@ -18,8 +18,12 @@ import RateVideoPrefaceContainer from "./pages/rating/rate-video-preface";
 import RateVideoContainer from "./pages/rating/rate-video";
 import PracticeContainer from "./pages/main/practice";
 import SurveyContainer from "./pages/survey/survey"
+import Survey2Container from "./pages/survey/survey2";
 import EndContainer from "./pages/end/end";
 import Session1Container from "./pages/main/session1";
+import Session2Container from "./pages/main/session2";
+import Survey2FeedbackContainer from "./pages/survey/survey2-feedback";
+import DemographicsContainer from "./pages/survey/demographics";
 
 
 export default class Routes extends Component {
@@ -38,12 +42,16 @@ export default class Routes extends Component {
                     <Route path="/Traditional-Feedback" component={TraditionalFeedbackContainer} />
                     <Route path="/Exp2Trial1" component={Exp2Trial1Container} />
                     <Route path="/Session1" component={Session1Container} />
+                    <Route path="/Session2" component={Session2Container} />
                     <Route path="/Exp2Trial2" component={Exp2Trial2Container} />
                     <Route path="/Rating" component={RateVideoPrefaceContainer} />
                     <Route path="/RateVideo" component={RateVideoContainer} />
                     <Route path="/Main1" component={Main1Container} />
                     <Route path="/Main2" component={Main2Container} />
                     <Route path="/Survey" component={SurveyContainer} />
+                    <Route path="/Survey2" component={Survey2Container} />
+                    <Route path="/Demographics" component={DemographicsContainer} />
+                    <Route path="/Survey2Feedback" component={Survey2FeedbackContainer} />
                     <Route path="/End" component={EndContainer} />
 
                 </Switch>

@@ -6,41 +6,74 @@ import "./start.css";
 
 function StartContainer() {
     // let history = useHistory();
-    const [text, setText] = useState("");
+    const [userId, setUserId] = useState("");
+    const [serverUserId, setServerUserId] = useState(null); // Store backend response
     const [agree, setAgree] = useState(false);
     const [tmpUser, setTmpUser] = useState(0);
+    const [error, setError] = useState(""); // For error handling
     const checkboxHandler = () => {
       setAgree(!agree);
     }
   
     const routeChange = () =>{ 
-      if (text=="") {
-        alert("Please make sure to complete all the fields!");
-      } else {
-        let data = {}
-        console.log(data)
-        sendData(data)
-        let path = '/#/Instructions'; 
-        // history.push(path);
-        window.location.assign(path);
-        console.log('moving to instructions page')
+      if (!userId) {
+        setError("Please enter a valid user ID.");
+        return; // Do not proceed if userId is empty
       }
-    }
+      fetch("http://localhost:8080/start_main", {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=UTF-8" },
+        body: JSON.stringify({ user_id: userId }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Received from backend:", data);
+          setServerUserId(data.user_id); // Save user_id from the backend response
+          localStorage.setItem("user-id", data['user_id']);
+          console.log(localStorage.getItem('user-id'));
+          let path = '/#/Instructions';
+          window.location.assign(path);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          setError("Failed to send data to the server.");
+        });
+    };
 
 // create a new user here 
-  useEffect(() => {
-      fetch('http://localhost:8080/setup_main')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        // send user id as well
-        setTmpUser(data['user_id'])
-      });
-  }, []);   
+  // useEffect(() => {
+  //     fetch('http://localhost:8080/start_main')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log(data)
+  //       // send user id as well
+  //       setTmpUser(data['user_id'])
+  //     });
+  // }, []);   
+
+//   useEffect(() => {
+//     fetch('http://localhost:8080/start_main', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json; charset=UTF-8',
+//       },
+//       body: JSON.stringify({ user_id: userId }),  // Ensure userId is defined or retrieved here
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log(data);
+//       setTmpUser(data['user_id']);
+//     })
+//     .catch((error) => {
+//       console.error('Error:', error);
+//       setError('Failed to send data to the server.');
+//     });
+//  }, []);  // Ensure that userId is available or passed correctly
     
 
-  const onChangeInput = e => {
-      setText(e.target.value);
+  // Handle input change
+  const handleInputChange = (e) => {
+    setUserId(e.target.value);
   };
 
   const sendData = (obj) => {
@@ -63,12 +96,12 @@ function StartContainer() {
             <p> Welcome to our study! </p>
 
             <div className="instr" style={{ marginLeft: "125px" }}>
-                    <t> Enter your given ID:</t>
+                    <span> Enter your given ID:</span>
             </div >
             <input
                 type="text"
-                value={text}
-                onChange={onChangeInput}
+                value={userId}
+                onChange={handleInputChange}
             />
 
             <Button onClick={routeChange} style={{marginLeft:"20px"}}>
@@ -77,6 +110,7 @@ function StartContainer() {
         </div>
       </div>
       );
-}
+    }
+
 
 export default StartContainer;

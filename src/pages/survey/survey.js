@@ -28,7 +28,22 @@ const formItemLayout = {
 const SurveyContainer = () => {
   const [form] = Form.useForm();
   const [answers, setAnswers] = useState({});
+  const [task, setTask] = useState(0);
 
+  // Fetch task number from backend
+  useEffect(() => {
+    const userId = localStorage.getItem("user-id");
+    
+    if (userId) {
+        fetch(`http://localhost:8080/setup?user_id=${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Fetched Task:', data);
+                setTask(Number(data.task_number)); // Set the task from the backend response
+            })
+            .catch(error => console.error('Error fetching task data:', error));
+    }
+  }, []);
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -37,14 +52,18 @@ const SurveyContainer = () => {
     // save data
     let data = {
         user_id: localStorage.getItem("user-id"),
-        q1: 1, 
-        q2: 2,
+        q1: values.Q1, 
+        q2: values.Q2,
     };
     sendData(data)
-    let path = '/#/Rating'; 
-    window.location.assign(path);
+    // Navigate based on task
+    if (task !== null) { // Ensure task is not null before navigation
+      console.log('Task Number:', task); // Debug the task number
+      let path = task % 2 === 0 ? '/#/AI-Preface' : '/#/Traditional-Preface';
+      window.location.assign(path);
+    }
   };
-
+  // also connect with the backend to randomize the task 
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
@@ -55,6 +74,7 @@ const SurveyContainer = () => {
     }).then(response => response.json())
       .then(message => {
         console.log(message)
+        
         // getLastestTodos();
       })
   } 
@@ -70,8 +90,7 @@ const SurveyContainer = () => {
         }}
       >
 
-        <div className="title"> Study survey</div>
-        <div className='text'> This is how you can create a questionnaire at the end of the experiment. </div>
+        <div className="title"> Session 1: Cognitive Load Assessment</div>
 
         <Form.Item 
             name="Q1" 

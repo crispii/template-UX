@@ -21,7 +21,8 @@ class User(db.Model):
     user_id = db.Column(db.Integer, nullable=False, primary_key=True)
     task = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, task):
+    def __init__(self, user_id, task):
+        self.user_id = user_id
         self.task = task
 
 
@@ -68,24 +69,67 @@ def get_current_time():
 # use case 1: assign a random task to the current user and create an id
 @app.route('/setup', methods=['GET'])
 def setup():
-    task_num = random.randint(1,2)
-    new_user = User(task=task_num)
-    db.session.add(new_user)
-    db.session.commit()
-    user_id = new_user.user_id
-    response = {'user_id': user_id, 'task_number': task_num}
-    return jsonify(response)
+    user_id = request.args.get('user_id')
+    existing_user = User.query.filter_by(user_id=user_id).first()
 
-@app.route('/setup_main', methods=['GET'])
-def setup_main():
-    # fix the task to 1 to display Main1
-    task_num = 1
-    new_user = User(task=task_num)
-    db.session.add(new_user)
-    db.session.commit()
-    user_id = new_user.user_id
-    response = {'user_id': user_id, 'task_number': task_num}
-    return jsonify(response)
+    
+    task_num = random.randint(1,2)
+
+    if existing_user:
+        task_num = existing_user.task
+        return jsonify({'user_id': user_id, 'task_number': task_num})
+    else:
+        return jsonify({'message': 'User not found'}), 404
+
+    # new_user = User(task=task_num)
+    # db.session.add(new_user)
+    # db.session.commit()
+    # user_id = new_user.user_id
+    # response = {'user_id': user_id, 'task_number': task_num}
+    # return jsonify(response)
+
+# @app.route('/setup_main', methods=['GET'])
+# def setup_main():
+#     # Parse the incoming JSON data
+#         request_data = request.get_json()
+#         user_id = request_data.get('user_id')
+
+#         # Check if the user already exists or create a new user
+#         existing_user = User.query.filter_by(user_id=user_id).first()
+#         if not existing_user:
+#             new_user = User(user_id=user_id)  # Store only user_id
+#             db.session.add(new_user)
+#             db.session.commit()
+
+#         # Prepare the response
+#         response_body = {'user_id': user_id}  # Send back the user_id
+#         return jsonify(response_body)
+
+    # task_num = 1
+    # new_user = User(task=task_num)
+    # db.session.add(new_user)
+    # db.session.commit()
+    # user_id = new_user.user_id
+    # response = {'user_id': user_id, 'task_number': task_num}
+    # return jsonify(response)
+
+@app.route('/start_main', methods=['POST'])
+def start_main():
+    # Parse the incoming JSON data
+    request_data = json.loads(request.data)
+    user_id = request_data['user_id']
+    task = random.randint(1,2)
+    # Check if the user already exists or create a new user
+    existing_user = User.query.filter_by(user_id=user_id).first()
+    if not existing_user:
+        new_user = User(user_id=user_id, task=task)  # Store only user_id
+        db.session.add(new_user)
+        db.session.commit()
+
+    print(f"User with user_id {user_id} added to the database.")
+    # Prepare the response
+    response_body = {'user_id': user_id, 'task_number': task}  # Send back the user_id
+    return jsonify(response_body)
 
 # use case 2:# define the order of the images to be loaded
 @app.route('/imageInfo', methods=['GET'])
