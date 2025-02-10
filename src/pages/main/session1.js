@@ -10,45 +10,26 @@ function Session1Container() {
     const [task, setTask] = useState(0);
     const [choice, setChoice] = useState(0);
     const [tmpUser, setTmpUser] = useState(0);
-    const [imageData, setImageData] = useState([]);
-    const [currentImage, setCurrentImage] = useState("");
-    const [currentPrediction, setCurrentPrediction] = useState("");
-    const [imageCount, setImageCount] = useState(0);
-    const [showPrediction, setShowPrediction] = useState(false);
+    const [trialCount, setTrialCount] = useState(0);
     const [taskTime, setTaskTime] = useState((Date.now() + 1000 * 1000));
 
     const [currentTime, setCurrentTime] = useState(0);
     const [moveToSurvey, setMoveToSurvey] = useState(false);
 
-    const [render, setRender] = useState(false);
 
-    let totalImages = 3;
+    let totalTrials = 2;
     const baseImgUrl = "./";
 
     const nextChange = () =>{
-            let count = imageCount + 1;
-            // save data
-            let data = {
-                q_id: currentImage,
-                user_id: tmpUser,
-                ans: choice,
-                input: text, 
-                time: ((Date.now() - taskTime) / 1000).toFixed(3)
-            };
-            console.log(data)
-            sendData(data)
-            if (count >= totalImages) {
-                console.log('done with images')
-                setMoveToSurvey(true);
+            let count = trialCount + 1;
+            setTrialCount(count)
+            if (count >= totalTrials) {
+                console.log('done with trials for session 1')
+                let path = '/#/Survey';
+                window.location.assign(path);
             } else {
                 // reinitialize variables
-                setChoice(0); 
-                setText("")
-                setImageCount(count);
-                setCurrentImage(imageData[count].name);
-                setCurrentPrediction(imageData[count].label);
                 setTaskTime(Date.now())
-                setShowPrediction(false);
             }
         
     }
@@ -65,21 +46,6 @@ function Session1Container() {
             console.log(message)
           })
       } 
-
-
-    const onChangeMultiple= e => {
-        setChoice(e.target.value);
-
-    };
-
-    const onChangeInput = e => {
-        setText(e.target.value);
-    };
-
-    const handlePredict=()=>{
-        setShowPrediction(true);
-    };
-
     // testing communication with backend
     useEffect(() => {
         fetch('http://0.0.0.0:8080/time').then(res => 
@@ -109,13 +75,6 @@ function Session1Container() {
         fetch('http://localhost:8080/imageInfo')
         .then(response => response.json())
         .then(data => {
-            console.log(data['imgs']);
-            setImageData(data['imgs']);
-            let image_name = data['imgs'][0].name
-            setCurrentImage(image_name)
-            console.log(image_name)
-            setCurrentPrediction(data['imgs'][0].label);
-            setRender(true);
             setTaskTime(Date.now())
         });
     }, []);
@@ -123,19 +82,16 @@ function Session1Container() {
 
 
     return (
-      <>
-       {render ?
-
             <div className="container">
-            <div className="title">Main experiment</div>
+            <div className="title">Session 1</div>
             
 
             <div className="text">
-                <t> Trial {imageCount + 1}</t>
+                <t> Trial {trialCount + 1}</t>
             </div>    
                 
 
-            <div className="button-container"> 
+            <div className="text"> 
                 <Button variant="btn btn-success"  onClick={nextChange}>
                     Next
                 </Button>
@@ -150,12 +106,7 @@ function Session1Container() {
 
             </div>
 
-        :
-            <> 
-            <h1> Loading ...</h1>
-            </>
-        }
-      </>
+       
        
       );
 }

@@ -19,7 +19,7 @@ function PracticeContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/Exp1Trial1';
+        let path = '/#/Session1';
         window.location.assign(path);
 
     }
