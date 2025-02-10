@@ -4,6 +4,11 @@
     text-align: center 
 }
 
+.text{
+    margin: 20px 0 20px 0;
+    text-align: center;
+}
+
 .container{
     margin-top: 20px;
     width: 80%;
@@ -36,8 +41,8 @@ t {
     display: inline-block;
     padding: 4px 4px;
     width: 75%;
-    margin-top: 20px;
-    margin-left: 13%;
+    text-align: center;
+    margin: 20px 0 20px 0;
     
   }
 

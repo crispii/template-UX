@@ -19,6 +19,7 @@ import RateVideoContainer from "./pages/rating/rate-video";
 import PracticeContainer from "./pages/main/practice";
 import SurveyContainer from "./pages/survey/survey"
 import EndContainer from "./pages/end/end";
+import Session1Container from "./pages/main/session1";
 
 
 export default class Routes extends Component {
@@ -36,6 +37,7 @@ export default class Routes extends Component {
                     <Route path="/AI-Feedback" component={AIFeedbackContainer} />
                     <Route path="/Traditional-Feedback" component={TraditionalFeedbackContainer} />
                     <Route path="/Exp2Trial1" component={Exp2Trial1Container} />
+                    <Route path="/Session1" component={Session1Container} />
                     <Route path="/Exp2Trial2" component={Exp2Trial2Container} />
                     <Route path="/Rating" component={RateVideoPrefaceContainer} />
                     <Route path="/RateVideo" component={RateVideoContainer} />
