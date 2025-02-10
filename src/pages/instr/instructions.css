@@ -23,7 +23,13 @@
     /* margin-left: 5%;
     margin-right: 5%; */
     margin-bottom: 10px;
-    text-align: left;
+    text-align: center;
+}
+
+.text ul, .text ol {
+    display: inline-block; /* Make lists behave like inline elements */
+    text-align: left; /* Align text inside the lists to the left */
+    padding-left: 0; /* Remove default padding */
 }
 
 
