@@ -45,10 +45,7 @@ function AIFeedbackContainer() {
         <h1>AI Feedback</h1> 
 
         <div className="text"> 
-            This is AI feedback
-            <ol>
-                <li> The next 2 pages will have 2 more trials to complete.</li>
-            </ol> 
+            (This is AI feedback.) The next 2 pages will have 2 more trials to complete. 
         </div>
 
         <div className="text"> 

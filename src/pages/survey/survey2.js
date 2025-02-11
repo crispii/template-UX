@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import {
   Form,
   Select,
+  Slider,
   // Radio,
   // Input,
   Button,
@@ -54,6 +55,9 @@ const Survey2Container = () => {
         user_id: localStorage.getItem("user-id"),
         q1: values.Q1, 
         q2: values.Q2,
+        q3: values.Q3,
+        q4: values.Q4,
+        q5: values.Q5,
     };
     sendData(data)
 
@@ -85,45 +89,110 @@ const Survey2Container = () => {
         name="validate_other"
         onFinish={onFinish}
         initialValues={{
+            Q1: 1,
+            Q2: 1,
+            Q3: 1,
+            Q4: 1,
+            Q5: 1
         }}
       >
 
-        <div className="title"> Session 2: Cognitive Load Assessment</div>
+        <div className="title"> Questionnaire</div>
+
+        <div className="text"> 
+            Please indicate your answer on a scale from 1 to 10 according to your suturing experience during Session 2.  
+        </div>
 
         <Form.Item 
-            name="Q1" 
-            label = {
-                <p style={{fontSize: "20px"}}> 1. How confident were you in your responses to complete the task?</p>}
-            rules={[{
-                    required: true,
-                  },
-                ]}>
-            <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Very unconfident</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Unconfident</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Confident</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Very confident</Radio>
-            </Radio.Group>
-        </Form.Item>
+          name="Q1" 
+          label={<p style={{ fontSize: "20px" }}>1. How mentally demanding was the task?</p>}
+          rules={[{ required: true }]}
+        >
+          <Slider 
+              min={1} 
+              max={10} 
+              marks={{
+                  1: "Very low",
+                  10: "Very high"
+              }} 
+              step={1} 
+              style={{ width: "60%", margin: "0 auto" }}
+              tooltip={{ open: false }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
         
-
         <Form.Item 
             name="Q2" 
-            label = {
-                <p style={{fontSize: "20px"}}> 2. How successful do you think you were you in accomplishing what you were asked to do? </p>}
-            rules={[{
-                    required: true,
-                  },
-                ]}>
-            <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Poor</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Fair</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Good</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Excellent</Radio>
-            </Radio.Group>
-        </Form.Item>
+            label={<p style={{ fontSize: "20px" }}>2. How physically demanding was the task?</p>}
+            rules={[{ required: true }]}
+        >
+          <Slider 
+                min={1} 
+                max={10} 
+                marks={{
+                    1: "Very low",
+                    10: "Very high"
+                }} 
+                step={1} 
+                style={{ width: "60%", margin: "0 auto" }}
+                tooltip={{ open: false }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
+
+      <Form.Item 
+            name="Q3" 
+            label={<p style={{ fontSize: "20px" }}>3. How successful were you in accomplishing what you were asked to do?</p>}
+            rules={[{ required: true }]}
+        >
+            <Slider 
+                min={1} 
+                max={10} 
+                marks={{
+                    1: "Very low",
+                    10: "Very high"
+                }} 
+                step={1} 
+                style={{ width: "60%", margin: "0 auto" }}
+                tooltip={{ open: false }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
+
+      <Form.Item 
+            name="Q4" 
+            label={<p style={{ fontSize: "20px" }}>4. How hard did you have to work to accomplish your level of performance?</p>}
+            rules={[{ required: true }]}
+        >
+          <Slider 
+                min={1} 
+                max={10} 
+                marks={{
+                    1: "Very low",
+                    10: "Very high"
+                }} 
+                step={1} 
+                style={{ width: "60%", margin: "0 auto" }}
+                tooltip={{ open: false }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
+
+
+      <Form.Item 
+            name="Q5" 
+            label={<p style={{ fontSize: "20px" }}>5. How insecure, discouraged, irritated, stressed, and annoyed were you?</p>}
+            rules={[{ required: true }]}
+        >
+          <Slider 
+                min={1} 
+                max={10} 
+                marks={{
+                    1: "Very low",
+                    10: "Very high"
+                }} 
+                step={1} 
+                style={{ width: "60%", margin: "0 auto" }}
+                tooltip={{ open: false }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
 
 
 

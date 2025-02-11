@@ -44,10 +44,7 @@ function TraditionalFeedbackContainer() {
         <h1>Traditional Feedback</h1> 
 
         <div className="text"> 
-            This is traditional feedback
-            <ol>
-                <li> The next 2 pages will have 2 more trials to complete.</li>
-            </ol> 
+            (This is traditional feedback.) The next 2 pages will have 2 more trials to complete.
         </div>
 
         <div className="text"> 

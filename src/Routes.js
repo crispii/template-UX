@@ -36,10 +36,10 @@ export default class Routes extends Component {
                     <Route path="/Practice" component={PracticeContainer} />
                     <Route path="/Exp1Trial1" component={Exp1Trial1Container} />
                     <Route path="/Exp1Trial2" component={Exp1Trial2Container} />
-                    <Route path="/AI-Preface" component={AIPrefaceContainer} />
-                    <Route path="/Traditional-Preface" component={TraditionalPrefaceContainer} />
-                    <Route path="/AI-Feedback" component={AIFeedbackContainer} />
-                    <Route path="/Traditional-Feedback" component={TraditionalFeedbackContainer} />
+                    <Route path="/FeedbackA-Preface" component={AIPrefaceContainer} />
+                    <Route path="/FeedbackB-Preface" component={TraditionalPrefaceContainer} />
+                    <Route path="/FeedbackA" component={AIFeedbackContainer} />
+                    <Route path="/FeedbackB" component={TraditionalFeedbackContainer} />
                     <Route path="/Exp2Trial1" component={Exp2Trial1Container} />
                     <Route path="/Session1" component={Session1Container} />
                     <Route path="/Session2" component={Session2Container} />

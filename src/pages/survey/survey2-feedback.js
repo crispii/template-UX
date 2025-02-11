@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import {
   Form,
   Select,
+  Slider,
   // Radio,
   // Input,
   Button,
@@ -54,6 +55,8 @@ const Survey2FeedbackContainer = () => {
         user_id: localStorage.getItem("user-id"),
         q1: values.Q1, 
         q2: values.Q2,
+        q3: values.Q3,
+        q4: values.Q4,
     };
     sendData(data)
 
@@ -88,22 +91,26 @@ const Survey2FeedbackContainer = () => {
         }}
       >
 
-        <div className="title"> Session 2: Feedback Perception Assessment</div>
+        <div className="title"> Questionnaire Part 2</div>
+
+        <div className="text"> 
+            Please provide responses on a scale from 1 to 5 to the following questions considering the feedback you were presented with and your suturing experience during Session 2.  
+        </div>
 
         <Form.Item 
             name="Q1" 
             label = {
-                <p style={{fontSize: "20px"}}> 1. How confident were you in your responses to complete the task?</p>}
+                <p style={{fontSize: "20px"}}> 1. The feedback I received was helpful.</p>}
             rules={[{
                     required: true,
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Very unconfident</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Unconfident</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Confident</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Very confident</Radio>
+                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -111,17 +118,51 @@ const Survey2FeedbackContainer = () => {
         <Form.Item 
             name="Q2" 
             label = {
-                <p style={{fontSize: "20px"}}> 2. How successful do you think you were you in accomplishing what you were asked to do? </p>}
+                <p style={{fontSize: "20px"}}> 2. The feedback I received was beneficial to my performance.</p>}
             rules={[{
                     required: true,
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Poor</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Fair</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Good</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Excellent</Radio>
+                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
+            </Radio.Group>
+        </Form.Item>
+
+        <Form.Item 
+            name="Q3" 
+            label = {
+                <p style={{fontSize: "20px"}}> 3. I understood how to integrate the feedback I received into the hands-on tasks.</p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group>
+                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
+            </Radio.Group>
+        </Form.Item>
+
+        <Form.Item 
+            name="Q4" 
+            label = {
+                <p style={{fontSize: "20px"}}> 4. I would like to have this type of training as part of surgery rotations.</p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group>
+                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
             </Radio.Group>
         </Form.Item>
 

@@ -44,6 +44,7 @@ function InstructionsContainer() {
       <div className="container">
         <h1>Instructions</h1> 
 
+
         <div className="text"> 
         <p>How to run a simple suture</p>
 

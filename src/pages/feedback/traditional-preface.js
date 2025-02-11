@@ -19,7 +19,7 @@ function TraditionalPrefaceContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/Traditional-Feedback';
+        let path = '/#/FeedbackB';
         window.location.assign(path);
         console.log('moving to traditional feedback page')
 
@@ -42,15 +42,15 @@ function TraditionalPrefaceContainer() {
 
     return (
       <div className="container">
-        <h1>Traditional Feedback Preface</h1> 
+        <h1>Feedback Preface</h1> 
 
         <div className="text"> 
-            The next page will be traditional feedback.
+            (The next page will be traditional feedback.)
         </div>
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
-                I understand that I will be receiving traditional feedback.
+                I understand that I will be receiving feedback for my performance.
             </Checkbox> 
         </div>
 

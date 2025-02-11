@@ -19,7 +19,7 @@ function AIPrefaceContainer() {
         //     let path = '/#/Main1'; 
         //     window.location.assign(path);
         // }
-        let path = '/#/AI-Feedback';
+        let path = '/#/FeedbackA';
         window.location.assign(path);
         console.log('moving to AI feedback page')
 
@@ -42,15 +42,15 @@ function AIPrefaceContainer() {
 
     return (
       <div className="container">
-        <h1>AI Feedback Preface</h1> 
+        <h1>Feedback Preface</h1> 
 
         <div className="text"> 
-            The next page will be AI feedback.
+            (The next page will be AI feedback.)
         </div>
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
-            I understand that I will be receiving AI feedback.
+            I understand that I will be receiving feedback for my performance.
             </Checkbox> 
         </div>
 

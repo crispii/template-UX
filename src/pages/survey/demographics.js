@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import {
   Form,
   Select,
+  Slider,
   // Radio,
   // Input,
   Button,
@@ -54,6 +55,11 @@ const DemographicsContainer = () => {
         user_id: localStorage.getItem("user-id"),
         q1: values.Q1, 
         q2: values.Q2,
+        q3: values.Q3,
+        q4: values.Q4,
+        q5: values.Q5,
+        q6: values.Q6,
+        q7: values.Q7,
     };
     sendData(data)
 
@@ -85,6 +91,7 @@ const DemographicsContainer = () => {
         name="validate_other"
         onFinish={onFinish}
         initialValues={{
+            Q7: 1
         }}
       >
 
@@ -93,17 +100,17 @@ const DemographicsContainer = () => {
         <Form.Item 
             name="Q1" 
             label = {
-                <p style={{fontSize: "20px"}}> 1. What is your age range?</p>}
+                <p style={{fontSize: "20px"}}> 1. What is your age group?</p>}
             rules={[{
                     required: true,
                   },
                 ]}>
-            <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>1</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>2</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>3</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>4</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>5</Radio>
+            <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
+                <Radio value="1" style={{fontSize: "18px"}}>18-24</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>25-34</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>35-44</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>45-54</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>55+</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -111,25 +118,104 @@ const DemographicsContainer = () => {
         <Form.Item 
             name="Q2" 
             label = {
-                <p style={{fontSize: "20px"}}> 2. What is your job? </p>}
+                <p style={{fontSize: "20px"}}> 2. What is your gender? </p>}
             rules={[{
                     required: true,
                   },
                 ]}>
-            <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>doctor</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>student</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>1</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>2</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>3</Radio>
+            <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
+                <Radio value="1" style={{fontSize: "18px"}}>Female</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Male</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Other</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Prefer not to say</Radio>
+            </Radio.Group>
+        </Form.Item>
+
+        <Form.Item 
+            name="Q3" 
+            label = {
+                <p style={{fontSize: "20px"}}> 3. What is your current level of training?</p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
+                <Radio value="1" style={{fontSize: "18px"}}>PY1-PY2</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>PY3-PY4</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>PY5</Radio>
+            </Radio.Group>
+        </Form.Item>
+
+        <Form.Item 
+            name="Q4" 
+            label = {
+                <p style={{fontSize: "20px"}}> 4. Do you play video games/ musical instruments?</p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
+                <Radio value="1" style={{fontSize: "18px"}}>Never</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>1-5 h per week </Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>6-10 h per week </Radio>
+                <Radio value="4" style={{fontSize: "18px"}}> 10+ h per week </Radio>
             </Radio.Group>
         </Form.Item>
 
 
+        <Form.Item 
+            name="Q5" 
+            label = {
+                <p style={{fontSize: "20px"}}> 5. How would you rate your general knowledge of artificial intelligence (AI)?</p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
+                <Radio value="1" style={{fontSize: "18px"}}>No knowledge</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Novice</Radio>
+                <Radio value="3" style={{fontSize: "18px"}}>Intermediate</Radio>
+                <Radio value="4" style={{fontSize: "18px"}}>Advanced</Radio>
+                <Radio value="5" style={{fontSize: "18px"}}>Expert</Radio>
+            </Radio.Group>
+        </Form.Item>
+
+        <Form.Item 
+            name="Q6" 
+            label = {
+                <p style={{fontSize: "20px"}}> 6. Have you previously participated in AI-based educational tools or training programs?  </p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
+                <Radio value="1" style={{fontSize: "18px"}}>No</Radio>
+                <Radio value="2" style={{fontSize: "18px"}}>Yes</Radio>
+            </Radio.Group>
+        </Form.Item>
+
+
+        <Form.Item 
+          name="Q7" 
+          label={<p style={{ fontSize: "20px" }}>7. How comfortable are you with using AI-based systems in your practice?</p>}
+          rules={[{ required: true }]}
+        >
+          <Slider 
+              min={1} 
+              max={10} 
+              marks={{
+                  1: "Very low",
+                  10: "Very high"
+              }} 
+              step={1} 
+              style={{ width: "60%", margin: "0 auto" }}
+              tooltip={{ open: false }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
 
          <Form.Item >
          
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" style={{margin: "40px"}}>
         Submit
         </Button>
         </Form.Item>
