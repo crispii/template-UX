@@ -26,18 +26,15 @@ function StartContainer() {
         body: JSON.stringify({ user_id: userId }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Received from backend:", data);
-          setServerUserId(data.user_id); // Save user_id from the backend response
-          localStorage.setItem("user-id", data['user_id']);
-          console.log(localStorage.getItem('user-id'));
-          let path = '/#/Instructions';
-          window.location.assign(path);
+        .then(message => {
+          console.log(message)
         })
         .catch((error) => {
           console.error("Error:", error);
           setError("Failed to send data to the server.");
         });
+        let path = '/#/Instructions';
+        window.location.assign(path);
     };
 
 // create a new user here 
@@ -74,6 +71,7 @@ function StartContainer() {
   // Handle input change
   const handleInputChange = (e) => {
     setUserId(e.target.value);
+    localStorage.setItem('user-id', e.target.value)
   };
 
   const sendData = (obj) => {

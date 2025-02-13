@@ -52,7 +52,6 @@ const SurveyContainer = () => {
     setAnswers(values)
     // save data
     let data = {
-        user_id: localStorage.getItem("user-id"),
         q1: values.Q1, 
         q2: values.Q2,
         q3: values.Q3,
@@ -67,11 +66,15 @@ const SurveyContainer = () => {
       window.location.assign(path);
     }
   };
-  // also connect with the backend to randomize the task 
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user-id"),
+        folder: 'baseline',
+        type: 'cogLoad',
+        content: obj,
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
@@ -115,11 +118,13 @@ const SurveyContainer = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
+
           />
       </Form.Item>
         
@@ -133,11 +138,12 @@ const SurveyContainer = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 
@@ -151,11 +157,12 @@ const SurveyContainer = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 
@@ -169,11 +176,12 @@ const SurveyContainer = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 
@@ -188,11 +196,12 @@ const SurveyContainer = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 

@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# keys
+/api/credentials.json
+
 # production
 /build
 

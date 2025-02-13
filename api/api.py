@@ -14,44 +14,15 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
+import firebase_admin
+from firebase_admin import db, credentials
 
-class User(db.Model):
-    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
-    task = db.Column(db.Integer, nullable=False)
+cred = credentials.Certificate("credentials.json")
+firebase_admin.initialize_app(cred, {"databaseURL": "https://skills-surgery-default-rtdb.firebaseio.com/"})
+ref= db.reference("/")
 
-    def __init__(self, user_id, task):
-        self.user_id = user_id
-        self.task = task
-
-
-class Responses(db.Model):
-    id = db.Column(db.Integer, nullable=False, primary_key=True)
-    q_id = db.Column(db.String(20), nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
-    ans = db.Column(db.Integer, nullable=False)
-    text = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.Float, nullable=False)
-
-    def __init__(self, q_id, user_id, ans, text, time):
-        self.q_id = q_id
-        self.user_id = user_id
-        self.ans = ans
-        self.text = text
-        self.time = time
-
-
-class Survey(db.Model):
-    id = db.Column(db.Integer, nullable=False, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False)
-    q1 = db.Column(db.Integer, nullable=False)
-    q2 = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, user_id, q1, q2):
-      self.user_id = user_id
-      self.q1 = q1
-      self.q2 = q2
 
 
 # define image names. You can load this information from a local file or a database
@@ -70,13 +41,11 @@ def get_current_time():
 @app.route('/setup', methods=['GET'])
 def setup():
     user_id = request.args.get('user_id')
-    existing_user = User.query.filter_by(user_id=user_id).first()
-
+    existing_user = False
     
     task_num = random.randint(1,2)
 
     if existing_user:
-        task_num = existing_user.task
         return jsonify({'user_id': user_id, 'task_number': task_num})
     else:
         return jsonify({'message': 'User not found'}), 404
@@ -118,17 +87,11 @@ def start_main():
     # Parse the incoming JSON data
     request_data = json.loads(request.data)
     user_id = request_data['user_id']
-    task = random.randint(1,2)
-    # Check if the user already exists or create a new user
-    existing_user = User.query.filter_by(user_id=user_id).first()
-    if not existing_user:
-        new_user = User(user_id=user_id, task=task)  # Store only user_id
-        db.session.add(new_user)
-        db.session.commit()
-
+    # TODO: check that the ID doesnt exist to avoid overwriting data
+    db.reference("/user_study/" + user_id).set('')
     print(f"User with user_id {user_id} added to the database.")
     # Prepare the response
-    response_body = {'user_id': user_id, 'task_number': task}  # Send back the user_id
+    response_body = {'user_id': user_id}  # Send back the user_id
     return jsonify(response_body)
 
 # use case 2:# define the order of the images to be loaded
@@ -149,9 +112,6 @@ def responsesData():
     text = request_data['input']
     time = request_data['time']
     print('saving data')
-    new_entry = Responses(q_id, user_id, ans, text, time)
-    db.session.add(new_entry)
-    db.session.commit()
     msg = "Record successfully added"
     print(msg)
     response_body = {'user_id': user_id}
@@ -161,12 +121,14 @@ def responsesData():
 @app.route('/surveyData', methods=['POST'])
 def surveyData():
     request_data = json.loads(request.data)
+    folder = request_data['folder']
+    survey_type = request_data['type']
+    data = request_data["content"]
     user_id = request_data['user_id']
-    q1 = request_data['q1']
-    q2 = request_data['q2']
-    new_entry = Survey(user_id=user_id, q1=q1, q2=q2)
-    db.session.add(new_entry)
-    db.session.commit()
+    db.reference("/user_study/" + user_id + '/' + folder).set({survey_type: data})
+
+
+
     msg = "Record successfully added"
     print(msg)
     response_body = {'user_id': user_id}
@@ -192,14 +154,6 @@ def user_serializer(obj):
   }
 
 
-# visualize the current entries in the tables
-@app.route('/api', methods=['GET'])
-def api():
-    return jsonify([*map(responses_serializer, Responses.query.all())])
-    # return jsonify([*map(user_serializer, User.query.all())])
-
-
 if __name__ == "__main__":
-    db.create_all()
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
 
