@@ -66,8 +66,8 @@ const Survey2Container = () => {
       method: 'POST',
       body: JSON.stringify({  
         user_id: localStorage.getItem("user-id"),
-        folder: 'intervention',
-        type: 'feedback',
+        folder: 'intervention' + localStorage.getItem("feedback"),
+        type: 'cogLoad',
         content: obj,
       }),
       headers: {

@@ -1,6 +1,7 @@
 import os
 import time
 import random
+import csv
 from urllib import response
 
 from flask import Flask, jsonify, json, request
@@ -82,6 +83,28 @@ def getImageInfo():
     response_body = {'imgs': images}
     return jsonify(response_body)
 
+@app.route('/get_videos', methods=['GET'])
+def get_videos():
+    # Load the video data from the CSV file
+    videos = []
+    try:
+        if not os.path.exists('videos.csv'):
+            return jsonify({"error": "File not found"}), 404
+        
+        with open('videos.csv', mode='r') as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                videos.append({'videoName': row['name']})
+    except Exception as e:
+        print(f"Error reading CSV file: {e}")
+        return jsonify({'error': 'Error loading video data from CSV.'}), 500
+
+    # Shuffle the list of videos for random order
+    random.shuffle(videos)
+    
+    # Return the shuffled video data
+    response_body = {'videos': videos}
+    return jsonify(response_body)
 
 # send data from frontend to backend
 @app.route('/responsesData', methods=['POST'])
@@ -113,7 +136,6 @@ def surveyData():
     print(msg)
     response_body = {'user_id': user_id}
     return jsonify(response_body) 
-
 
 # auxiliary functions to visualize stored data
 def responses_serializer(obj):
