@@ -7,6 +7,7 @@ import {
   // Radio,
   // Input,
   Button,
+  Slider,
   Radio,
 } from 'antd';
 import './rating.css'
@@ -36,8 +37,15 @@ const RateVideoContainer = () => {
     setAnswers(values)
     // save data
     let data = {
-        q1: 1, 
-        q2: 2,
+        respectForTissue: values.Q1, 
+        timeAndMotion: values.Q2,
+        instrumentHandling: values.Q3,
+        useOfInstruments: values.Q4,
+        sutureHandling: values.Q5,
+        flowOfOperation: values.Q6,
+        useOfNonDomHand: values.Q7,
+        knowledgeOfProcedure: values.Q8,
+        overallPerformance: values.Q9,
     };
     sendData(data)
     let path = '/#/Demographics'; 
@@ -71,48 +79,91 @@ const RateVideoContainer = () => {
         name="validate_other"
         onFinish={onFinish}
         initialValues={{
+          Q1: 1,
         }}
       >
 
         <div className="title"> Video Rating</div>
-        <div className='text'> Based on the performance in the video, rate the following skills </div>
+        <div className='text'>Please select the operator's performance in each category based on the current video. </div>
 
         <Form.Item 
             name="Q1" 
-            label = {
-                <p style={{fontSize: "20px"}}> 1. How confident were you in your responses to complete the task?</p>}
-            rules={[{
-                    required: true,
-                  },
-                ]}>
-            <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly agree</Radio>
-                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
-                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
-                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly disagree</Radio>
-            </Radio.Group>
+            rules={[{ required: true }]}
+        >
+          <Slider 
+            min={1} 
+            max={5} 
+            marks={{
+              1: "Frequently used unnecessary force on tissues or caused damage by inappropriate instrument use",
+              3: "Careful handling of the tissue, but with occasional inadvertent damage",
+              5: "Consistently handled tissue appropriately with minimal damage",
+            }} 
+            step={1} 
+            style={{ width: "60%", margin: "0 auto" }}
+            tooltip={{ open: false }} // Hides tooltip to keep it clean
+                      />
         </Form.Item>
         
 
         <Form.Item 
             name="Q2" 
-            label = {
-                <p style={{fontSize: "20px"}}> 2. How successful do you think you were you in accomplishing what you were asked to do? </p>}
             rules={[{
                     required: true,
                   },
                 ]}>
-            <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Poor</Radio>
-                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Fair</Radio>
-                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Good</Radio>
-                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Excellent</Radio>
-            </Radio.Group>
+            <Slider 
+              min={1} 
+              max={5} 
+              marks={{
+                1: "Many unnecessary movements",
+                3: "Efficient time and motion, but some unnecessary movements",
+                5: "Clear economy of movement and maximum efficiency",
+              }} 
+              step={1} 
+              style={{ width: "60%", margin: "0 auto" }}
+              tooltip={{ open: false }} // Hides tooltip to keep it clean
+            />
         </Form.Item>
 
+        <Form.Item 
+            name="Q3" 
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Slider 
+              min={1} 
+              max={5} 
+              marks={{
+                1: "Repeatedly makes tentative or awkward moves with instruments",
+                3: "Competent use of instruments, but occasionally awkward",
+                5: "Fluid movements",
+              }} 
+              step={1} 
+              style={{ width: "60%", margin: "0 auto" }}
+              tooltip={{ open: false }} // Hides tooltip to keep it clean
+            />
+        </Form.Item>
 
+        <Form.Item 
+            name="Q4" 
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Slider 
+              min={1} 
+              max={5} 
+              marks={{
+                1: "Frequently utilized inappropriate instrument",
+                3: "Generally used appropriate instruments",
+                5: "Obviously familiar with instruments and their use",
+              }} 
+              step={1} 
+              style={{ width: "60%", margin: "0 auto" }}
+              tooltip={{ open: false }} // Hides tooltip to keep it clean
+            />
+        </Form.Item>
 
          <Form.Item >
          

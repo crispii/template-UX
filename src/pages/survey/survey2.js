@@ -64,10 +64,10 @@ const Survey2Container = () => {
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
-      body: JSON.stringify({
+      body: JSON.stringify({  
         user_id: localStorage.getItem("user-id"),
         folder: 'intervention',
-        type: 'cogLoad',
+        type: 'feedback',
         content: obj,
       }),
       headers: {
