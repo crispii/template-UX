@@ -63,7 +63,7 @@ def start_main():
     request_data = json.loads(request.data)
     user_id = request_data['user_id']
     # TODO: check that the ID doesnt exist to avoid overwriting data
-    user_ref = db.reference("/user_study/" + user_id).set('')
+    user_ref = db.reference("/user_study/" + user_id)
     user_data = user_ref.get()
 
     if (user_data):
