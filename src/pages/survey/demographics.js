@@ -52,14 +52,13 @@ const DemographicsContainer = () => {
     setAnswers(values)
     // save data
     let data = {
-        user_id: localStorage.getItem("user-id"),
-        q1: values.Q1, 
-        q2: values.Q2,
-        q3: values.Q3,
-        q4: values.Q4,
-        q5: values.Q5,
-        q6: values.Q6,
-        q7: values.Q7,
+        Age: values.Q1, 
+        Gender: values.Q2,
+        trainingLevel: values.Q3,
+        Games: values.Q4,
+        aiKnowledge: values.Q5,
+        aiTraining: values.Q6,
+        aiComfort: values.Q7,
     };
     sendData(data)
 
@@ -71,7 +70,11 @@ const DemographicsContainer = () => {
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user-id"),
+        folder: 'demo',
+        content: obj,
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }

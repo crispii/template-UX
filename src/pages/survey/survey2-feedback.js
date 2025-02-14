@@ -4,9 +4,6 @@ import { useParams } from "react-router-dom";
 import {
   Form,
   Select,
-  Slider,
-  // Radio,
-  // Input,
   Button,
   Radio,
 } from 'antd';
@@ -40,19 +37,19 @@ const Survey2FeedbackContainer = () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched Task:', data);
-                setTask(Number(data.task_number)); // Set the task from the backend response
+                setTask(Number(data.task_number));
             })
             .catch(error => console.error('Error fetching task data:', error));
     }
   }, []);
 
   const onFinish = (values) => {
+    const userId = localStorage.getItem("user-id");
     console.log('Received values of form: ', values);
     let copySaveArray = values
     setAnswers(values)
     // save data
     let data = {
-        user_id: localStorage.getItem("user-id"),
         q1: values.Q1, 
         q2: values.Q2,
         q3: values.Q3,
@@ -68,15 +65,19 @@ const Survey2FeedbackContainer = () => {
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user-id"),
+        folder: 'intervention' + localStorage.getItem("feedback"),
+        type: 'feedback',
+        content: obj,
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     }).then(response => response.json())
       .then(message => {
         console.log(message)
-        
-        // getLastestTodos();
+      
       })
   } 
 

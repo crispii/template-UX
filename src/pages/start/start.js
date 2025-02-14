@@ -25,48 +25,24 @@ function StartContainer() {
         headers: { "Content-Type": "application/json; charset=UTF-8" },
         body: JSON.stringify({ user_id: userId }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            return response.json().then((errorData) => {
+              throw new Error(errorData.error || "An error occurred");
+            });
+          }
+          return response.json();
+        })
         .then(message => {
           console.log(message)
+          let path = '/#/Instructions';
+          window.location.assign(path);
         })
         .catch((error) => {
           console.error("Error:", error);
-          setError("Failed to send data to the server.");
+          setError(error.message);
         });
-        let path = '/#/Instructions';
-        window.location.assign(path);
     };
-
-// create a new user here 
-  // useEffect(() => {
-  //     fetch('http://localhost:8080/start_main')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data)
-  //       // send user id as well
-  //       setTmpUser(data['user_id'])
-  //     });
-  // }, []);   
-
-//   useEffect(() => {
-//     fetch('http://localhost:8080/start_main', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json; charset=UTF-8',
-//       },
-//       body: JSON.stringify({ user_id: userId }),  // Ensure userId is defined or retrieved here
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log(data);
-//       setTmpUser(data['user_id']);
-//     })
-//     .catch((error) => {
-//       console.error('Error:', error);
-//       setError('Failed to send data to the server.');
-//     });
-//  }, []);  // Ensure that userId is available or passed correctly
-    
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -74,18 +50,6 @@ function StartContainer() {
     localStorage.setItem('user-id', e.target.value)
   };
 
-  const sendData = (obj) => {
-    fetch('http://localhost:8080/responsesData', {
-      method: 'POST',
-      body: JSON.stringify(obj),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    }).then(response => response.json())
-      .then(message => {
-        console.log(message)
-      })
-  } 
 
     return (
       <div className="Home">

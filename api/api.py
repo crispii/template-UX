@@ -57,38 +57,19 @@ def setup():
     # response = {'user_id': user_id, 'task_number': task_num}
     # return jsonify(response)
 
-# @app.route('/setup_main', methods=['GET'])
-# def setup_main():
-#     # Parse the incoming JSON data
-#         request_data = request.get_json()
-#         user_id = request_data.get('user_id')
-
-#         # Check if the user already exists or create a new user
-#         existing_user = User.query.filter_by(user_id=user_id).first()
-#         if not existing_user:
-#             new_user = User(user_id=user_id)  # Store only user_id
-#             db.session.add(new_user)
-#             db.session.commit()
-
-#         # Prepare the response
-#         response_body = {'user_id': user_id}  # Send back the user_id
-#         return jsonify(response_body)
-
-    # task_num = 1
-    # new_user = User(task=task_num)
-    # db.session.add(new_user)
-    # db.session.commit()
-    # user_id = new_user.user_id
-    # response = {'user_id': user_id, 'task_number': task_num}
-    # return jsonify(response)
-
 @app.route('/start_main', methods=['POST'])
 def start_main():
     # Parse the incoming JSON data
     request_data = json.loads(request.data)
     user_id = request_data['user_id']
     # TODO: check that the ID doesnt exist to avoid overwriting data
-    db.reference("/user_study/" + user_id).set('')
+    user_ref = db.reference("/user_study/" + user_id).set('')
+    user_data = user_ref.get()
+
+    if (user_data):
+        return jsonify({"error": "User ID already exists. Please use a different ID."}), 400
+
+    user_ref.set('')
     print(f"User with user_id {user_id} added to the database.")
     # Prepare the response
     response_body = {'user_id': user_id}  # Send back the user_id
@@ -126,7 +107,6 @@ def surveyData():
     data = request_data["content"]
     user_id = request_data['user_id']
     db.reference("/user_study/" + user_id + '/' + folder).set({survey_type: data})
-
 
 
     msg = "Record successfully added"

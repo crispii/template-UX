@@ -36,7 +36,6 @@ const RateVideoContainer = () => {
     setAnswers(values)
     // save data
     let data = {
-        user_id: localStorage.getItem("user-id"),
         q1: 1, 
         q2: 2,
     };
@@ -48,7 +47,11 @@ const RateVideoContainer = () => {
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user-id"),
+        folder: 'OSATS_eval',
+        content: obj,
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }

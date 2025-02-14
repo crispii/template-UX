@@ -5,10 +5,7 @@ import {
   Form,
   Select,
   Slider,
-  // Radio,
-  // Input,
   Button,
-  Radio,
 } from 'antd';
 import './survey.css'
 const { Option } = Select;
@@ -48,11 +45,9 @@ const Survey2Container = () => {
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    let copySaveArray = values
     setAnswers(values)
     // save data
     let data = {
-        user_id: localStorage.getItem("user-id"),
         q1: values.Q1, 
         q2: values.Q2,
         q3: values.Q3,
@@ -69,7 +64,12 @@ const Survey2Container = () => {
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user-id"),
+        folder: 'intervention',
+        type: 'cogLoad',
+        content: obj,
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
