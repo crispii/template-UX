@@ -65,6 +65,8 @@ function StartContainer() {
                 value={userId}
                 onChange={handleInputChange}
             />
+            
+            {error && <div className="error">{error}</div>} {/* Display error message */}
 
             <Button onClick={routeChange} style={{marginLeft:"20px"}}>
                 Continue

@@ -50,6 +50,7 @@ const RateVideoContainer = () => {
       body: JSON.stringify({
         user_id: localStorage.getItem("user-id"),
         folder: 'OSATS_eval',
+        type: 'survey',
         content: obj,
       }),
       headers: {
@@ -85,11 +86,11 @@ const RateVideoContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Strongly agree</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Agree</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Disagree</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Strongly disagree</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly agree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly disagree</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -103,11 +104,11 @@ const RateVideoContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Poor</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Fair</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Average</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Good</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Excellent</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Poor</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Fair</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Average</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Good</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Excellent</Radio>
             </Radio.Group>
         </Form.Item>
 

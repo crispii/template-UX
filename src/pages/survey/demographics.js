@@ -73,6 +73,7 @@ const DemographicsContainer = () => {
       body: JSON.stringify({
         user_id: localStorage.getItem("user-id"),
         folder: 'demo',
+        type: 'survey',
         content: obj,
       }),
       headers: {
@@ -109,11 +110,11 @@ const DemographicsContainer = () => {
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px"}}>18-24</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>25-34</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>35-44</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>45-54</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>55+</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>18-24</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>25-34</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>35-44</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>45-54</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>55+</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -127,10 +128,10 @@ const DemographicsContainer = () => {
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px"}}>Female</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Male</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Other</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Prefer not to say</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Female</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Male</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Other</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Prefer not to say</Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -143,9 +144,9 @@ const DemographicsContainer = () => {
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px"}}>PY1-PY2</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>PY3-PY4</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>PY5</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>PY1-PY2</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>PY3-PY4</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>PY5</Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -158,10 +159,10 @@ const DemographicsContainer = () => {
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px"}}>Never</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>1-5 h per week </Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>6-10 h per week </Radio>
-                <Radio value="4" style={{fontSize: "18px"}}> 10+ h per week </Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Never</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>1-5 h per week </Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>6-10 h per week </Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}> 10+ h per week </Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -175,11 +176,11 @@ const DemographicsContainer = () => {
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px"}}>No knowledge</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Novice</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Intermediate</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Advanced</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Expert</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>No knowledge</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Novice</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Intermediate</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Advanced</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Expert</Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -192,8 +193,8 @@ const DemographicsContainer = () => {
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px"}}>No</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Yes</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>No</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Yes</Radio>
             </Radio.Group>
         </Form.Item>
 
