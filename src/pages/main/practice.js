@@ -41,9 +41,9 @@ function PracticeContainer() {
 
     return (
       <div className="container">
-        <h1>Practice Trial</h1> 
+        <h1 className="title" style={{ fontSize: "50px" }}>Practice Trial</h1> 
 
-        <div className="text"> 
+        <div className="text" style={{ fontSize: "40px" }}> 
             Use this time to practice using the tools for suturing. Once you finish, your sutures will be monitored and recorded in the next page.
         </div>
 

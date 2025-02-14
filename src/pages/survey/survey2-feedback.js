@@ -106,11 +106,11 @@ const Survey2FeedbackContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Agree</Radio>
             </Radio.Group>
         </Form.Item>
         
@@ -124,11 +124,11 @@ const Survey2FeedbackContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Agree</Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -141,11 +141,11 @@ const Survey2FeedbackContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
+              <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Agree</Radio>
             </Radio.Group>
         </Form.Item>
 
@@ -158,11 +158,11 @@ const Survey2FeedbackContainer = () => {
                   },
                 ]}>
             <Radio.Group>
-                <Radio value="1" style={{fontSize: "18px"}}>Strongly Disagree</Radio>
-                <Radio value="2" style={{fontSize: "18px"}}>Disagree</Radio>
-                <Radio value="3" style={{fontSize: "18px"}}>Neutral</Radio>
-                <Radio value="4" style={{fontSize: "18px"}}>Agree</Radio>
-                <Radio value="5" style={{fontSize: "18px"}}>Strong Agree</Radio>
+              <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Agree</Radio>
             </Radio.Group>
         </Form.Item>
 

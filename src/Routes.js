@@ -24,6 +24,7 @@ import Session1Container from "./pages/main/session1";
 import Session2Container from "./pages/main/session2";
 import Survey2FeedbackContainer from "./pages/survey/survey2-feedback";
 import DemographicsContainer from "./pages/survey/demographics";
+import BreakContainer from "./pages/main/break";
 
 
 export default class Routes extends Component {
@@ -47,6 +48,7 @@ export default class Routes extends Component {
                     <Route path="/Rating" component={RateVideoPrefaceContainer} />
                     <Route path="/RateVideo" component={RateVideoContainer} />
                     <Route path="/Main1" component={Main1Container} />
+                    <Route path="/Break" component={BreakContainer} />
                     <Route path="/Main2" component={Main2Container} />
                     <Route path="/Survey" component={SurveyContainer} />
                     <Route path="/Survey2" component={Survey2Container} />

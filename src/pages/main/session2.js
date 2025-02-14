@@ -80,10 +80,10 @@ function Session2Container() {
 
     return (
             <div className="container">
-            <div className="title">Session 2</div>
+            <div className="title" style={{ fontSize: "50px" }}>Session 2</div>
             
 
-            <div className="text">
+            <div className="text" style={{ fontSize: "40px" }}>
                 <span> Trial {trialCount + 1}</span>
             </div>    
                 
@@ -95,7 +95,7 @@ function Session2Container() {
             </div>
 
             {(moveToSurvey) && 
-            <div className="text"> 
+            <div className="text" style={{ fontSize: "40px" }}> 
                 <t> You have completed the two trials. </t>
                 
             </div>

@@ -24,7 +24,7 @@ function Session1Container() {
     
             if (newCount >= totalTrials) {
                 console.log('done with trials for session 1');
-                let path = '/#/Survey';
+                let path = '/#/Break';
                 window.location.assign(path);
             } else {
                 // reinitialize variables
@@ -80,10 +80,10 @@ function Session1Container() {
 
     return (
             <div className="container">
-            <div className="title">Session 1</div>
+            <div className="title" style={{ fontSize: "50px" }}>Session 1</div>
             
 
-            <div className="text">
+            <div className="text" style={{ fontSize: "40px" }}>
                 <span> Trial {trialCount + 1}</span>
             </div>    
                 
@@ -95,7 +95,7 @@ function Session1Container() {
             </div>
 
             {(moveToSurvey) && 
-            <div className="text"> 
+            <div className="text" style={{ fontSize: "40px" }}> 
                 <t> You have completed the two trials. </t>
                 
             </div>
