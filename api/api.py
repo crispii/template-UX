@@ -130,7 +130,7 @@ def surveyData():
     data = request_data["content"]
     user_id = request_data['user_id']
     
-    db.reference("/user_study/" + user_id + '/' + folder).set({survey_type: data})
+    db.reference("/user_study/" + user_id + '/' + folder + '/' + survey_type).set(data)
 
 
     msg = "Record successfully added"

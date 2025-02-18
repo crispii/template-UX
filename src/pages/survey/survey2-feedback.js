@@ -77,7 +77,7 @@ const Survey2FeedbackContainer = () => {
       method: 'POST',
       body: JSON.stringify({
         user_id: localStorage.getItem("user-id"),
-        folder: 'intervention_feedback' + feedback,
+        folder: 'intervention' + feedback,
         type: 'feedback',
         content: obj,
       }),
