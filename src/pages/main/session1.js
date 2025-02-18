@@ -24,7 +24,7 @@ function Session1Container() {
     
             if (newCount >= totalTrials) {
                 console.log('done with trials for session 1');
-                let path = '/#/Break';
+                let path = '/#/Survey';
                 window.location.assign(path);
             } else {
                 // reinitialize variables

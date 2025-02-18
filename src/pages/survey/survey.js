@@ -35,15 +35,15 @@ const SurveyContainer = () => {
   useEffect(() => {
     const userId = localStorage.getItem("user-id");
     
-    if (userId) {
-        fetch(`http://localhost:8080/setup?user_id=${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Fetched Task:', data);
-                setTask(Number(data.task_number)); // Set the task from the backend response
-            })
-            .catch(error => console.error('Error fetching task data:', error));
-    }
+    // if (userId) {
+    //     fetch(`http://localhost:8080/setup?user_id=${userId}`)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log('Fetched Task:', data);
+    //             setTask(Number(data.task_number)); // Set the task from the backend response
+    //         })
+    //         .catch(error => console.error('Error fetching task data:', error));
+    // }
   }, []);
 
   const onFinish = (values) => {
@@ -60,11 +60,13 @@ const SurveyContainer = () => {
     };
     sendData(data)
     // Navigate based on task
-    if (task !== null) { // Ensure task is not null before navigation
-      console.log('Task Number:', task); // Debug the task number
-      let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
-      window.location.assign(path);
-    }
+    // if (task !== null) { // Ensure task is not null before navigation
+    //   console.log('Task Number:', task); // Debug the task number
+    //   let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
+    //   window.location.assign(path);
+    // }
+    let path = '/#/Break';
+    window.location.assign(path);
   };
   const sendData = (obj) => {
     fetch('http://localhost:8080/surveyData', {

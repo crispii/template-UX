@@ -44,7 +44,7 @@ def setup():
     user_id = request.args.get('user_id')
     existing_user = False
     
-    task_num = random.randint(1,2)
+    task_num = random.randint(1,2) # 1 is traditional, 2 is ai
 
     if existing_user:
         return jsonify({'user_id': user_id, 'task_number': task_num})
@@ -129,6 +129,7 @@ def surveyData():
     survey_type = request_data['type']
     data = request_data["content"]
     user_id = request_data['user_id']
+    
     db.reference("/user_study/" + user_id + '/' + folder).set({survey_type: data})
 
 

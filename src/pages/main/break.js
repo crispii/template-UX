@@ -13,6 +13,18 @@ function BreakContainer() {
     }
 
     useEffect(() => {
+        const userId = localStorage.getItem("user-id");
+    
+        if (userId) {
+            fetch(`http://localhost:8080/setup?user_id=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched Task:', data);
+                    setTask(Number(data.task_number)); // Set the task from the backend response
+                })
+                .catch(error => console.error('Error fetching task data:', error));
+        }
+
         if (timeLeft > 0) {
             const timer = setTimeout(() => {
                 setTimeLeft(timeLeft - 1);
@@ -24,15 +36,15 @@ function BreakContainer() {
     }, [timeLeft]);
 
     const routeChange = () =>{ 
-        // if (task % 2 === 0) {
-        //     let path = '/#/Main2'; 
-        //     window.location.assign(path);
-        // } else {
-        //     let path = '/#/Main1'; 
-        //     window.location.assign(path);
-        // }
-        let path = '/#/Survey';
-        window.location.assign(path);
+        
+        if (task !== null) { // Ensure task is not null before navigation
+            console.log('Task Number:', task); // Debug the task number
+            let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
+            window.location.assign(path);
+          }
+
+        // let path = '/#/Survey';
+        // window.location.assign(path);
 
     }
 
@@ -56,7 +68,7 @@ function BreakContainer() {
         <h1 className="title" style={{ fontSize: "50px" }}>Break Time</h1> 
 
         <div className="text" style={{ fontSize: "30px" }}> 
-            Wait 2 minutes before moving onto the next page. The timer will show when the next page has been unlocked.
+            You have completed Session 1 and will have a 2 minute break before starting Session 2. Please wait.
         </div>
 
         <h2 className="text" style={{ fontSize: "50px" }}>{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</h2>

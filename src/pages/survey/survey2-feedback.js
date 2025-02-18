@@ -57,17 +57,27 @@ const Survey2FeedbackContainer = () => {
     };
     sendData(data)
 
-    let path = '/#/RateVideo';
+    let path = '/#/Demographics';
     window.location.assign(path);
     
   };
   // also connect with the backend to randomize the task 
   const sendData = (obj) => {
+
+    let feedback;
+
+    if (localStorage.getItem("task") == 1) {
+      feedback = "_traditional"
+    }
+    else {
+      feedback = "_AI"
+    }
+
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
       body: JSON.stringify({
         user_id: localStorage.getItem("user-id"),
-        folder: 'intervention' + localStorage.getItem("feedback"),
+        folder: 'intervention_feedback' + feedback,
         type: 'feedback',
         content: obj,
       }),

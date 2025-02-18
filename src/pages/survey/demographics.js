@@ -209,7 +209,8 @@ const DemographicsContainer = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}

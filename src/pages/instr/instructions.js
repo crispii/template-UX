@@ -46,26 +46,31 @@ function InstructionsContainer() {
 
 
         <div className="text"> 
-        <p>How to run a simple suture</p>
+        <p style={{textAlign: 'left'}}>Your task is to execute a simple suture by placing three interrupted instrument-tied sutures on incisions made in a simulated skin pad (define spacing in-between).</p>
 
-        <p><strong>Tools Available:</strong> Scissors, needle holder, forceps, needles, and suture thread.</p>
+        <p style={{textAlign: 'left'}}>You are provided with <strong>three</strong> tools: a needle driver, surgical forceps, and suture scissors. You will also have sutures thread with needle. </p>
 
-        <p><strong>Define:</strong></p>
-        <ul>
-            <li>Number of stitches</li>
-            <li>Parallel</li>
-            <li>Start and end with instrument tie</li>
-        </ul>
+        <p style={{textAlign: 'left', marginBottom: '30px'}}><strong>NOTE:</strong> You can use your left or right hand with no tool. </p>
 
-        <p>You will complete four trials in two separate sessions.</p>
-
-        <p><strong>Steps:</strong></p> 
+        <p style={{textAlign: 'left'}}>Each interrupted suture involves the following actions:  </p>
             <ol>
-                <li> Place your hand in the hand position holders </li>
-                <li> You will find the tools on the left (forceps) and right (needle holder, scissors, and needle with thread) </li>
-                <li> You will complete X sutures. The video recording will start and end for each one.</li>
-                <li> You will be presented with the first questionnaire after the first session.  </li>
-                <li> You will complete X more sutures. The video recording will start and end for each one. </li>
+                <li> Pass the needle through the material </li>
+                <li> Pull the suture </li>
+                <li> Perform an instrumental tie </li>
+                <li> Lay the knot </li>
+                <li> Cut the suture </li>
+                <li> Background action </li>
+            </ol>
+
+        <p style={{textAlign: 'left', margin: '20px'}}>You will complete a total of <strong>four</strong> sutures across two sessions with a feedback intervention between sessions as follows:</p>
+            <ol>
+                <li>Start each trial by placing your hands in the designated hand holders </li>
+                <li>Locate your tools. Left side: forceps. Right side: needle driver, scissors, and thread. </li>
+                <li> Complete two sutures. The researcher will start and stop video recoridng for each suture. Allow the researcher to accommodate the skin pad at the beginning of each trial.  </li>
+                <li> Respond to the first questionnaire and take a break.</li>
+                <li> Read the feedback description and presentation </li>
+                <li> Complete two more sutures. </li>
+                <li>Respond the final questionnaires.</li>
             </ol> 
         </div>
 
@@ -76,7 +81,7 @@ function InstructionsContainer() {
         </div>
 
         <div className="text"> 
-            <Button disabled={!agree} variant="btn btn-success" onClick={routeChange}>
+            <Button disabled={!agree} variant="btn btn-success" onClick={routeChange} style={{margin: "10px"}}>
                 Start
             </Button>
         </div>

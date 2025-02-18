@@ -60,13 +60,23 @@ const Survey2Container = () => {
     window.location.assign(path);
     
   };
-  // also connect with the backend to randomize the task 
+
   const sendData = (obj) => {
+
+    let feedback;
+
+    if (localStorage.getItem("task") == 1) {
+      feedback = "_traditional"
+    }
+    else {
+      feedback = "_AI"
+    }
+
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',
       body: JSON.stringify({  
         user_id: localStorage.getItem("user-id"),
-        folder: 'intervention' + localStorage.getItem("feedback"),
+        folder: 'intervention' + feedback,
         type: 'cogLoad',
         content: obj,
       }),
@@ -113,7 +123,8 @@ const Survey2Container = () => {
               max={10} 
               marks={{
                   1: "Very low",
-                  10: "Very high"
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
@@ -131,7 +142,8 @@ const Survey2Container = () => {
                 max={10} 
                 marks={{
                     1: "Very low",
-                    10: "Very high"
+                    10: "Very high",
+                    ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
@@ -149,7 +161,8 @@ const Survey2Container = () => {
                 max={10} 
                 marks={{
                     1: "Very low",
-                    10: "Very high"
+                    10: "Very high",
+                    ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
@@ -167,7 +180,8 @@ const Survey2Container = () => {
                 max={10} 
                 marks={{
                     1: "Very low",
-                    10: "Very high"
+                    10: "Very high",
+                    ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
@@ -186,7 +200,8 @@ const Survey2Container = () => {
                 max={10} 
                 marks={{
                     1: "Very low",
-                    10: "Very high"
+                    10: "Very high",
+                    ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
