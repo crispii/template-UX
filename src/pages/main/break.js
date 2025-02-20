@@ -6,24 +6,13 @@ function BreakContainer() {
 
     const [isButtonEnabled, setIsButtonEnabled] = useState(false);
     const [task, setTask] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(120);
+    const [timeLeft, setTimeLeft] = useState(60);
 
     const checkboxHandler = () => {
         setIsButtonEnabled(!isButtonEnabled);
     }
 
     useEffect(() => {
-        const userId = localStorage.getItem("user-id");
-    
-        if (userId) {
-            fetch(`http://localhost:8080/setup?user_id=${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Fetched Task:', data);
-                    setTask(Number(data.task_number)); // Set the task from the backend response
-                })
-                .catch(error => console.error('Error fetching task data:', error));
-        }
 
         if (timeLeft > 0) {
             const timer = setTimeout(() => {
@@ -35,10 +24,58 @@ function BreakContainer() {
         }
     }, [timeLeft]);
 
+    // determine feedback assignment 
+    useEffect(()=> {
+        const userId = localStorage.getItem("user-id");
+        if (userId) {
+            fetch(`http://localhost:8080/setup?user_id=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched Task:', data);
+                    setTask(Number(data.task_number)); // Set the task from the backend response
+                })
+                .catch(error => console.error('Error fetching task data:', error));
+    }
+    }, [])
+
+    function startPollingForResults(jobId, trialNumber){
+        fetch(`http://localhost:8080/check-status/${jobId}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            if (data.success) {
+                if (data.status === 'completed') {
+                    console.log(`Trial ${trialNumber} completed with execution time: ${data.result.execution_time_seconds.toFixed(2)} seconds`);
+                }
+                // if the job is not completed
+                else if (data.status === 'failed') {
+                    console.error(`Process failed for trial ${trialNumber}:`, data.error);
+                }
+             }
+             // if the job is not found
+             else {
+                console.log(data.message)
+             }
+            })
+          .catch(error => {
+                console.error('Error checking status:', error.message);
+            });
+    }
+
     const routeChange = () =>{ 
         
         if (task !== null) { // Ensure task is not null before navigation
             console.log('Task Number:', task); // Debug the task number
+            // TODO: check that the two jobs are completed
+
+            const jobId1 = localStorage.getItem(`jobId_trial${1}`);
+            console.log(jobId1)
+            startPollingForResults(jobId1, 1);
+            const jobId2 = localStorage.getItem(`jobId_trial${2}`);
+            console.log(jobId2)
+            startPollingForResults(jobId2, 2);
+
+
             let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
             window.location.assign(path);
           }

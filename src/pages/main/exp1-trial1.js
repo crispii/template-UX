@@ -12,10 +12,30 @@ function Exp1Trial1Container() {
     }
 
     const routeChange = () =>{ 
+        console.log('asking the backend to process video')
+        sendData()
         let path = '/#/Exp1Trial2';
         window.location.assign(path);
 
     }
+
+    const sendData = () => {
+        fetch('http://localhost:8080/process_videos', {
+          method: 'POST',
+          body: JSON.stringify({
+            user_id: localStorage.getItem("user-id"),
+            trial: '1'
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        }).then(response => response.json())
+          .then(message => {
+            console.log(message)
+            
+            // getLastestTodos();
+          })
+      } 
 
     return (
       <div className="container">

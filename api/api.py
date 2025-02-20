@@ -2,11 +2,16 @@ import os
 import time
 import random
 import csv
+import subprocess
+import threading
+import uuid
 from urllib import response
 
 from flask import Flask, jsonify, json, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+
+from script_to_run import time_consuming_process
 
 
 app = Flask(__name__)
@@ -24,6 +29,28 @@ cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, {"databaseURL": "https://skills-surgery-default-rtdb.firebaseio.com/"})
 ref= db.reference("/")
 
+jobs = {}
+
+# functions to run the python code from the backend
+def run_background_task(job_id, data_size, complexity):
+    try:
+        result = time_consuming_process(data_size, complexity)
+        jobs[job_id] = {"status": "completed", "result": result}
+    except Exception as e:
+        jobs[job_id] = {"status": "failed", "error": str(e)}
+
+
+def run_command(command):
+    """Runs a shell command and checks for errors."""
+    print(f"Running: {command}")
+    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        print(f"Error in command: {command}")
+        print(result.stderr)
+        exit(1)  # Stop execution if an error occurs
+    
+    print(result.stdout)
 
 
 # define image names. You can load this information from a local file or a database
@@ -46,10 +73,7 @@ def setup():
     
     task_num = random.randint(1,2) # 1 is traditional, 2 is ai
 
-    if existing_user:
-        return jsonify({'user_id': user_id, 'task_number': task_num})
-    else:
-        return jsonify({'message': 'User not found'}), 404
+    return jsonify({'user_id': user_id, 'task_number': task_num})
 
     # new_user = User(task=task_num)
     # db.session.add(new_user)
@@ -63,7 +87,6 @@ def start_main():
     # Parse the incoming JSON data
     request_data = json.loads(request.data)
     user_id = request_data['user_id']
-    # TODO: check that the ID doesnt exist to avoid overwriting data
     user_ref = db.reference("/user_study/" + user_id)
     user_data = user_ref.get()
 
@@ -82,6 +105,54 @@ def getImageInfo():
     random.shuffle(images)
     response_body = {'imgs': images}
     return jsonify(response_body)
+
+@app.route('/process_videos', methods=['POST'])
+def process_videos():
+    request_data = json.loads(request.data)
+    trial_video = request_data['trial_number']
+    print('requesting processing in the backend for trial {}'.format(trial_video))
+    # run_command(
+    #     f"python generate_dataset.py "
+    #     f"--videos_root {args.videos_root} "
+    # )
+
+    job_id = str(uuid.uuid4())
+    
+    # Initialize job status
+    jobs[job_id] = {"status": "processing"}
+    
+    # Start process in background
+    thread = threading.Thread(
+        target=run_background_task,
+        args=(job_id, 10000, 20)
+    )
+    thread.daemon = True
+    thread.start()
+    
+    # Return immediately with job ID
+    return jsonify({
+        "success": True,
+        "job_id": job_id,
+        "message": "Process started in background"
+    })
+    # TODO: may need to consider if there is an error launching the code 
+
+    return jsonify(response_body)
+
+
+
+@app.route('/check-status/<job_id>', methods=['GET'])
+def check_status(job_id):
+    if job_id not in jobs:
+        return jsonify({"success": False, "message": "Job not found"}), 404
+    
+    return jsonify({
+        "success": True,
+        "job_id": job_id,
+        "status": jobs[job_id]["status"],
+        "result": jobs[job_id].get("result"),
+        "error": jobs[job_id].get("error")
+    })
 
 @app.route('/get_videos', methods=['GET'])
 def get_videos():
@@ -130,7 +201,7 @@ def surveyData():
     data = request_data["content"]
     user_id = request_data['user_id']
     
-    db.reference("/user_study/" + user_id + '/' + folder).set({survey_type: data})
+    db.reference("/user_study/" + user_id + '/' + folder + '/' + survey_type).set(data)
 
 
     msg = "Record successfully added"

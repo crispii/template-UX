@@ -20,10 +20,12 @@ function Session1Container() {
 
     const nextChange = () =>{
         setTrialCount(prevCount => {
+            console.log('asking the backend to process video')
             const newCount = prevCount + 1;
+            sendData(newCount)
     
             if (newCount >= totalTrials) {
-                console.log('done with trials for session 1');
+                console.log('done with trials for Session 1');
                 let path = '/#/Survey';
                 window.location.assign(path);
             } else {
@@ -35,6 +37,30 @@ function Session1Container() {
         });
         
     }
+
+    const sendData = (num) => {
+        fetch('http://localhost:8080/process_videos', {
+          method: 'POST',
+          body: JSON.stringify({
+            user_id: localStorage.getItem("user-id"),
+            trial_number: num
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        }).then(response => response.json())
+          .then(data => {
+            console.log(data)
+            if (data.success) {
+                // Store job ID for later - need to differentiate job_trial1 and job_trial2
+                localStorage.setItem(`jobId_trial${num}`, data.job_id);
+
+              }
+          })
+          .catch(error => {
+            console.error('Error starting process:', error.message);
+          });
+      } 
 
 
     // testing communication with backend
