@@ -1,8 +1,9 @@
 import time
+import json
 import random
 from typing import List, Dict, Any
 
-def time_consuming_process(data_size: int = 1000, complexity: int = 5) -> Dict[str, Any]:
+def time_consuming_process(data_size: int = 1000, complexity: int = 5, trial: int = 1, file_name: str="output") -> Dict[str, Any]:
     """
     A function that simulates a time-consuming algorithm.
     
@@ -40,14 +41,20 @@ def time_consuming_process(data_size: int = 1000, complexity: int = 5) -> Dict[s
         result = intermediate
     
     elapsed_time = time.time() - start_time
+
+    out_dict = {
+                    "result_sample": result[:5],
+                    "data_processed": data_size,
+                    "operations_performed": complexity,
+                    "execution_time_seconds": elapsed_time,
+                    "status": "completed"
+                }
+    print(result[:5])
+    with open(file_name +'_{}.json'.format(trial), "w", encoding="utf-8") as file:
+        json.dump(out_dict, file, indent=4, ensure_ascii=False)
+        
+    return out_dict
     
-    return {
-        "result_sample": result[:5],
-        "data_processed": data_size,
-        "operations_performed": complexity,
-        "execution_time_seconds": elapsed_time,
-        "status": "completed"
-    }
 
 if __name__ == "__main__":
     # This allows you to test the script directly if needed

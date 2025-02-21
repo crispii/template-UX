@@ -38,6 +38,15 @@ function TraditionalFeedbackContainer() {
     //     });
     // }, []);
 
+    useEffect(() => {
+        fetch('http://localhost:8080/load_outputs')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            console.log(data['result_sample']);
+        });
+    }, []);
+
 
     return (
       <div className="container">

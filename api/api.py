@@ -31,10 +31,14 @@ ref= db.reference("/")
 
 jobs = {}
 
+def load_json(file_path):
+    with open(file_path, "r", encoding="utf-8") as file:
+        return json.load(file)
+
 # functions to run the python code from the backend
-def run_background_task(job_id, data_size, complexity):
+def run_background_task(job_id, data_size, complexity, trial):
     try:
-        result = time_consuming_process(data_size, complexity)
+        result = time_consuming_process(data_size, complexity, trial)
         jobs[job_id] = {"status": "completed", "result": result}
     except Exception as e:
         jobs[job_id] = {"status": "failed", "error": str(e)}
@@ -109,6 +113,7 @@ def getImageInfo():
 @app.route('/process_videos', methods=['POST'])
 def process_videos():
     request_data = json.loads(request.data)
+    userID = request_data['user_id'] # will need this userID later to tell the video file
     trial_video = request_data['trial_number']
     print('requesting processing in the backend for trial {}'.format(trial_video))
     # run_command(
@@ -124,10 +129,12 @@ def process_videos():
     # Start process in background
     thread = threading.Thread(
         target=run_background_task,
-        args=(job_id, 10000, 20)
+        args=(job_id, 10000, 20, trial_video)
     )
     thread.daemon = True
     thread.start()
+    
+    # TODO: may need to consider if there is an error launching the code 
     
     # Return immediately with job ID
     return jsonify({
@@ -135,9 +142,6 @@ def process_videos():
         "job_id": job_id,
         "message": "Process started in background"
     })
-    # TODO: may need to consider if there is an error launching the code 
-
-    return jsonify(response_body)
 
 
 
@@ -153,6 +157,22 @@ def check_status(job_id):
         "result": jobs[job_id].get("result"),
         "error": jobs[job_id].get("error")
     })
+
+@app.route('/load_outputs', methods=['GET'])
+def load_outputs():
+    data1 = load_json('output_1.json')
+    data2 = load_json('output_2.json')
+    sample1 = data1["result_sample"]
+    sample2 = data2["result_sample"]
+
+    # Compute the average for each index
+    average_sample = [(a + b) / 2 for a, b in zip(sample1, sample2)]
+
+    averaged_data = {
+                        "result_sample": average_sample
+                    }
+
+    return jsonify(averaged_data)
 
 @app.route('/get_videos', methods=['GET'])
 def get_videos():

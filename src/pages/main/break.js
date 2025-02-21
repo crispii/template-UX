@@ -6,7 +6,7 @@ function BreakContainer() {
 
     const [isButtonEnabled, setIsButtonEnabled] = useState(false);
     const [task, setTask] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(60);
+    const [timeLeft, setTimeLeft] = useState(30);
 
     const checkboxHandler = () => {
         setIsButtonEnabled(!isButtonEnabled);
@@ -75,7 +75,7 @@ function BreakContainer() {
             console.log(jobId2)
             startPollingForResults(jobId2, 2);
 
-
+            // TODO: do not move if the jobs are not completed
             let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
             window.location.assign(path);
           }
