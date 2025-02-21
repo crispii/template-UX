@@ -106,7 +106,7 @@ function BreakContainer() {
         <h1 className="title" style={{ fontSize: "50px" }}>Break Time</h1> 
 
         <div className="text" style={{ fontSize: "30px" }}> 
-            You have completed Session 1 and will have a 2 minute break before starting Session 2. Please wait.
+            You have completed Session 1 and will have a 30 second break before starting Session 2. Please wait.
         </div>
 
         <h2 className="text" style={{ fontSize: "50px" }}>{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</h2>
