@@ -138,15 +138,18 @@ const DemographicsContainer = () => {
         <Form.Item 
             name="Q3" 
             label = {
-                <p style={{fontSize: "20px"}}> 3. What is your current level of training?</p>}
+                <p style={{fontSize: "20px"}}> 3. Which phase of your medical education are you currently in?</p>}
             rules={[{
                     required: true,
                   },
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
-                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>PY1-PY2</Radio>
-                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>PY3-PY4</Radio>
-                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>PY5</Radio>
+                <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Pre-clinical </Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Clearkships </Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Residency preparation </Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Residency PY1-PY2 </Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Residency PY3-PY4 </Radio>
+                <Radio value="6" style={{fontSize: "18px", marginLeft: "25px"}}>Residency PY5 </Radio>
             </Radio.Group>
         </Form.Item>
 

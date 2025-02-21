@@ -59,15 +59,11 @@ const RateVideoContainer = () => {
     // save data
     let data = {
         q_id: currentVideo,
-        respectForTissue: values.Q1, 
-        timeAndMotion: values.Q2,
-        instrumentHandling: values.Q3,
-        useOfInstruments: values.Q4,
-        sutureHandling: values.Q5,
-        flowOfOperation: values.Q6,
-        useOfNonDomHand: values.Q7,
-        knowledgeOfProcedure: values.Q8,
-        overallPerformance: values.Q9,
+        timeAndMotion: values.Q1,
+        instrumentHandling: values.Q2,
+        useOfInstruments: values.Q3,
+        sutureHandling: values.Q4,
+        flowOfOperation: values.Q5,
     };
     sendData(data)
 
@@ -142,38 +138,16 @@ const RateVideoContainer = () => {
           Q2: 1,
           Q3: 1,
           Q4: 1,
-          Q5: 1,
-          Q6: 1,
-          Q7: 1,
-          Q8: 1,
-          Q9: 1,
+          Q5: 1
         }}
       >
 
 
         <div className='text'>Please select the operator's performance in each category based on the current video. </div>
-
-        <Form.Item 
-            name="Q1" 
-            rules={[{ required: true }]}
-        >
-          <Slider 
-            min={1} 
-            max={5} 
-            marks={{
-              1: "Frequently used unnecessary force on tissues or caused damage by inappropriate instrument use",
-              3: "Careful handling of the tissue, but with occasional inadvertent damage",
-              5: "Consistently handled tissue appropriately with minimal damage",
-            }} 
-            step={1} 
-            style={{ width: "60%", margin: "0 auto" }}
-            tooltip={{ open: false }} // Hides tooltip to keep it clean
-                      />
-        </Form.Item>
         
 
         <Form.Item 
-            name="Q2" 
+            name="Q1" 
             rules={[{
                     required: true,
                   },
@@ -193,7 +167,7 @@ const RateVideoContainer = () => {
         </Form.Item>
 
         <Form.Item 
-            name="Q3" 
+            name="Q2" 
             rules={[{
                     required: true,
                   },
@@ -213,7 +187,7 @@ const RateVideoContainer = () => {
         </Form.Item>
 
         <Form.Item 
-            name="Q4" 
+            name="Q3" 
             rules={[{
                     required: true,
                   },
@@ -233,7 +207,7 @@ const RateVideoContainer = () => {
         </Form.Item>
 
         <Form.Item 
-            name="Q5" 
+            name="Q4" 
             rules={[{
                     required: true,
                   },
@@ -253,7 +227,7 @@ const RateVideoContainer = () => {
         </Form.Item>
 
         <Form.Item 
-            name="Q6" 
+            name="Q5" 
             rules={[{
                     required: true,
                   },
@@ -265,66 +239,6 @@ const RateVideoContainer = () => {
                 1: "Frequently stopped operating and seemed unsure of next move",
                 3: "Demonstrated some forward planning and reasonable progression of procedure",
                 5: "Obviously planned operation",
-              }} 
-              step={1} 
-              style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
-            />
-        </Form.Item>
-
-        <Form.Item 
-            name="Q7" 
-            rules={[{
-                    required: true,
-                  },
-                ]}>
-            <Slider 
-              min={1} 
-              max={5} 
-              marks={{
-                1: "Consistently poor placement or failure to use non-dominant hand",
-                3: "Appropriate use of non-dominant hand most of the time",
-                5: "Strategically used non-dominant hand to the best advantage at all times",
-              }} 
-              step={1} 
-              style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
-            />
-        </Form.Item>
-
-        <Form.Item 
-            name="Q8" 
-            rules={[{
-                    required: true,
-                  },
-                ]}>
-            <Slider 
-              min={1} 
-              max={5} 
-              marks={{
-                1: "Inefficient knowledge of procedure; looked unsure and hesitant",
-                3: "Knew important steps of procedure",
-                5: "Demonstrated familiarity of all steps of procedure",
-              }} 
-              step={1} 
-              style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
-            />
-        </Form.Item>
-
-        <Form.Item 
-            name="Q9" 
-            rules={[{
-                    required: true,
-                  },
-                ]}>
-            <Slider 
-              min={1} 
-              max={5} 
-              marks={{
-                1: "Very poor",
-                3: "Competent",
-                5: "Very good",
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}

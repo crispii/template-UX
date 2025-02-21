@@ -57,6 +57,7 @@ const SurveyContainer = () => {
         q3: values.Q3,
         q4: values.Q4,
         q5: values.Q5,
+        q6: values.Q6,
     };
     sendData(data)
     // Navigate based on task
@@ -100,7 +101,8 @@ const SurveyContainer = () => {
           Q2: 1,
           Q3: 1,
           Q4: 1,
-          Q5: 1
+          Q5: 1,
+          Q6: 1
         }}
       >
 
@@ -191,6 +193,25 @@ const SurveyContainer = () => {
       <Form.Item 
           name="Q5" 
           label={<p style={{ fontSize: "20px" }}>5. How insecure, discouraged, irritated, stressed, and annoyed were you?</p>}
+          rules={[{ required: true }]}
+        >
+          <Slider 
+              min={1} 
+              max={10} 
+              marks={{
+                  1: "Very low",
+                  10: "Very high",
+                  ...Object.fromEntries([...Array(8)].map((_, i) => [i + 2, " "])) 
+              }} 
+              step={1} 
+              style={{ width: "60%", margin: "0 auto" }}
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
+          />
+      </Form.Item>
+
+      <Form.Item 
+          name="Q6" 
+          label={<p style={{ fontSize: "20px" }}>6. How confident are you performing sutures?</p>}
           rules={[{ required: true }]}
         >
           <Slider 

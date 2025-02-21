@@ -33,6 +33,7 @@ function BreakContainer() {
                 .then(data => {
                     console.log('Fetched Task:', data);
                     setTask(Number(data.task_number)); // Set the task from the backend response
+                    localStorage.setItem("task", Number(data.task_number));
                 })
                 .catch(error => console.error('Error fetching task data:', error));
     }

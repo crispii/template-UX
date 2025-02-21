@@ -3,38 +3,36 @@ import {Button, Modal, Checkbox, Input, Radio} from 'antd'
 import "antd/dist/antd.css";
 import "./main.css";
 
-import PredictionContainer from '../../components/predictionContainer'
-
 function Session2Container() {
-    const [task, setTask] = useState(0);
-    const [tmpUser, setTmpUser] = useState(0);
-    const [trialCount, setTrialCount] = useState(0);
+    const [trialCount, setTrialCount] = useState(() => {
+        return Number(localStorage.getItem("trialCount")) || 0;
+    });
     const [taskTime, setTaskTime] = useState((Date.now() + 1000 * 1000));
+    const task = localStorage.getItem("task");
 
     const [currentTime, setCurrentTime] = useState(0);
     const [moveToSurvey, setMoveToSurvey] = useState(false);
 
 
-    let totalTrials = 2;
-    const baseImgUrl = "./";
+    // let totalTrials = 2;
 
-    const nextChange = () =>{
-        setTrialCount(prevCount => {
-            const newCount = prevCount + 1;
-    
-            if (newCount >= totalTrials) {
-                console.log('done with trials for session 2');
-                let path = '/#/Survey2';
-                window.location.assign(path);
-            } else {
-                // reinitialize variables
-                setTaskTime(Date.now());
-            }
-    
-            return newCount; // Ensure the state updates correctly
-        });
-        
-    }
+    useEffect(() => {
+        localStorage.setItem("trialCount", trialCount);
+    }, [trialCount]);
+
+    const nextChange = () => {
+        if (trialCount == 0) {
+            setTrialCount(trialCount + 1);
+            let path = task % 2 === 0 ? '/#/FeedbackA' : '/#/FeedbackB';
+            window.location.assign(path);
+        } else {
+            console.log("Done with trials for session 2");
+            localStorage.removeItem("trialCount"); // Clear storage after completion
+            localStorage.removeItem("task"); // Clear storage after completion
+            let path = '/#/Survey2';
+            window.location.assign(path);
+        } 
+    };
 
 
     // testing communication with backend
@@ -45,38 +43,6 @@ function Session2Container() {
             console.log(data.time)
         });
         }, []);
-
-    // // create a new user here 
-    // useEffect(() => {
-    //     fetch('http://localhost:8080/start_main', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json; charset=UTF-8',
-    //         },
-    //         body: JSON.stringify({ user_id: 'user-id' }),  // Use actual user_id here
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         console.log(data['task_number']);
-    //         setTask(data['task_number']);
-    //         // send user id as well
-    //         setTmpUser(data['user_id'])
-    //     });
-    // }, []);
-    
-
-    // // initialize image
-    // useEffect(() => {
-    //     console.log('getting images')
-    //     fetch('http://localhost:8080/imageInfo')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         setTaskTime(Date.now())
-    //     });
-    // }, []);
-
-
 
     return (
             <div className="container">

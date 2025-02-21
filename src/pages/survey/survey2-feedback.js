@@ -54,10 +54,12 @@ const Survey2FeedbackContainer = () => {
         q2: values.Q2,
         q3: values.Q3,
         q4: values.Q4,
+        q4: values.Q5,
+        q4: values.Q6,
     };
     sendData(data)
 
-    let path = '/#/Demographics';
+    let path = '/#/Rating';
     window.location.assign(path);
     
   };
@@ -163,7 +165,7 @@ const Survey2FeedbackContainer = () => {
         <Form.Item 
             name="Q4" 
             label = {
-                <p style={{fontSize: "20px"}}> 4. I would like to have this type of training as part of surgery rotations.</p>}
+                <p style={{fontSize: "20px"}}> 4. Between the first and second session today, I knew how to improve my performance in the task.</p>}
             rules={[{
                     required: true,
                   },
@@ -177,7 +179,39 @@ const Survey2FeedbackContainer = () => {
             </Radio.Group>
         </Form.Item>
 
+        <Form.Item 
+            name="Q5" 
+            label = {
+                <p style={{fontSize: "20px"}}> 5. I would like to have this type of training as part of my program.</p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group>
+              <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Agree</Radio>
+            </Radio.Group>
+        </Form.Item>
 
+        <Form.Item 
+            name="Q6" 
+            label = {
+                <p style={{fontSize: "20px"}}> 6.I would recommend this opportunity for other students. </p>}
+            rules={[{
+                    required: true,
+                  },
+                ]}>
+            <Radio.Group>
+              <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Disagree</Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Disagree</Radio>
+                <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Neutral</Radio>
+                <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Agree</Radio>
+                <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Strongly Agree</Radio>
+            </Radio.Group>
+        </Form.Item>
 
          <Form.Item >
          
