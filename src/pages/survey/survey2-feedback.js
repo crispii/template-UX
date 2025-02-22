@@ -61,6 +61,7 @@ const Survey2FeedbackContainer = () => {
 
     let path = '/#/Rating';
     window.location.assign(path);
+    window.scrollTo(0, 0);
     
   };
   // also connect with the backend to randomize the task 

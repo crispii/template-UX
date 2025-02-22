@@ -164,12 +164,14 @@ def load_outputs():
     data2 = load_json('output_2.json')
     sample1 = data1["result_sample"]
     sample2 = data2["result_sample"]
+    feedback = load_json('feedback_info.json')
 
     # Compute the average for each index
     average_sample = [(a + b) / 2 for a, b in zip(sample1, sample2)]
 
     averaged_data = {
-                        "result_sample": average_sample
+                        "result_sample": average_sample,
+                        "feedback": feedback
                     }
 
     return jsonify(averaged_data)

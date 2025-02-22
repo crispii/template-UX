@@ -1,0 +1,16 @@
+[
+    {
+        "ranking": 1, 
+        "proxy_name": "right_hand_orientation_needle_passing",
+        "current_average": "above",
+        "video_ref": "/output_right.mp4",
+        "message": ""
+    },
+    {
+        "ranking": 2, 
+        "proxy_name": "left_hand_orientation_needle_passing",
+        "current_average": "above",
+        "video_ref": "/output_left.mp4", 
+        "message": ""
+    }
+]

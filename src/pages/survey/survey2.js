@@ -59,7 +59,7 @@ const Survey2Container = () => {
 
     let path = '/#/Survey2Feedback';
     window.location.assign(path);
-    
+    window.scrollTo(0, 0);
   };
 
   const sendData = (obj) => {
