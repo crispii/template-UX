@@ -107,8 +107,8 @@ const Survey2FeedbackContainer = () => {
 
         <div className="title"> Questionnaire Part 2</div>
 
-        <div className="text"> 
-            Please provide responses on a scale from 1 to 5 to the following questions considering the feedback you were presented with and your suturing experience during Session 2.  
+        <div className="text" style={{fontSize: "20px"}}> 
+            Please provide responses on a scale from 1 to 5 to the following questions considering the feedback you were presented with and your suturing experience during <b>Session 2</b>.  
         </div>
 
         <Form.Item 
@@ -200,7 +200,7 @@ const Survey2FeedbackContainer = () => {
         <Form.Item 
             name="Q6" 
             label = {
-                <p style={{fontSize: "20px"}}> 6.I would recommend this opportunity for other students. </p>}
+                <p style={{fontSize: "20px"}}> 6. I would recommend this opportunity for other students. </p>}
             rules={[{
                     required: true,
                   },

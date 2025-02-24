@@ -109,7 +109,7 @@ const SurveyContainer = () => {
         <div className="title"> Questionnaire</div>
 
         <div className="text"> 
-          Please indicate your answer on a scale from 1 to 10 according to your suturing experience during Session 1.  
+          Please indicate your answer on a scale from 1 to 10 according to your suturing experience during <b>Session 1</b>.  
         </div>
        
         <Form.Item 

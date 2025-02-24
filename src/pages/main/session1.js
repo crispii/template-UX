@@ -20,9 +20,12 @@ function Session1Container() {
 
     const nextChange = () =>{
         setTrialCount(prevCount => {
-            console.log('asking the backend to process video')
             const newCount = prevCount + 1;
-            sendData(newCount)
+            if (newCount < 2) {
+                // only process the first trial
+                console.log('asking the backend to process video')
+                sendData(newCount)
+            }
     
             if (newCount >= totalTrials) {
                 console.log('done with trials for Session 1');

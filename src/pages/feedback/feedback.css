@@ -129,6 +129,13 @@ t {
     
 }
 
+.fb-text ol {
+    list-style-position: inside;
+    padding-left: 20px;
+    text-align: left;
+    margin: 10px 0;
+}
+
 .instr{
     margin-top: 20px;
     width: 80%;

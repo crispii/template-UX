@@ -21,8 +21,12 @@ function RateVideoPrefaceContainer() {
       <div className="container">
         <h1>Rate Video Preface</h1> 
 
-        <div className="text"> 
-                On the next page, you will be shown a video and asked to rate certain skills.
+        <div className="text" style={{ fontSize: "20px" }}> 
+            On the next page, you will see two of your recordings and be asked to rate specific skills. 
+            
+        </div>
+        <div className="text" style={{ fontSize: "20px" }}> 
+            Each skill will be rated on a five-point scale, where lower values indicate a lower level of proficiency and higher values indicate greater proficiency.
         </div>
 
         <div className="text"> 

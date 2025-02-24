@@ -6,7 +6,7 @@ function BreakContainer() {
 
     const [isButtonEnabled, setIsButtonEnabled] = useState(false);
     const [task, setTask] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(30);
+    const [timeLeft, setTimeLeft] = useState(180);
 
     const checkboxHandler = () => {
         setIsButtonEnabled(!isButtonEnabled);
@@ -79,7 +79,8 @@ function BreakContainer() {
             startPollingForResults(jobId2, 2);
 
             // TODO: do not move if the jobs are not completed
-            let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
+            // let path = task % 2 === 0 ? '/#/FeedbackA-Preface' : '/#/FeedbackB-Preface';
+            let path = '/#/Feedback-Preface'
             window.location.assign(path);
           }
 
@@ -108,7 +109,7 @@ function BreakContainer() {
         <h1 className="title" style={{ fontSize: "50px" }}>Break Time</h1> 
 
         <div className="text" style={{ fontSize: "30px" }}> 
-            You have completed Session 1 and will have a 30 second break before starting Session 2. Please wait.
+            You have completed Session 1 and will have a 3 minutes break before starting Session 2. Please wait.
         </div>
 
         <h2 className="text" style={{ fontSize: "50px" }}>{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</h2>

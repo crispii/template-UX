@@ -18,7 +18,11 @@ function AIFeedbackContainer() {
     const [videoRef3, setVideoRef3] = useState("");
 
     const [display, setDisplay] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(4 * 60);
+    const baseVideoUrl = "./experts_clips/";
 
+    const subjectID = localStorage.getItem("user-id");
+    const selfVideoName = `participants_clips/${subjectID}_trial1_seg.mp4`;
 
     const checkboxHandler = () => {
         setAgree(!agree);
@@ -38,6 +42,7 @@ function AIFeedbackContainer() {
         console.log('moving to session 2 page')
 
     }
+
 
     // connect with the backend to randomize the task 
     // useEffect(() => {
@@ -68,23 +73,62 @@ function AIFeedbackContainer() {
               .then(data => {
                 console.log(data)
                 console.log(data['result_sample']);
-                setProxy1(data['feedback'][0]['proxy_name'])
+                setProxy1(data['feedback'][0]['proxy_name'] + '/' + data['feedback'][0]['gesture'] +  '/' + data['feedback'][0]['message'])
                 setVideoRef1(data['feedback'][0]['video_ref'])
                 console.log(proxy1)
-                setProxy2(data['feedback'][1]['proxy_name'])
+                setProxy2(data['feedback'][1]['proxy_name'] + '/' + data['feedback'][1]['gesture'] + '/' + data['feedback'][1]['message'])
                 setVideoRef2(data['feedback'][1]['video_ref'])
+                setProxy3(data['feedback'][2]['proxy_name'] + '/' + data['feedback'][2]['gesture'] + '/' + data['feedback'][2]['message'])
+                setVideoRef3(data['feedback'][2]['video_ref'])
                 setDisplay(true);
     
               })
            
     }, []);
 
+    // Timer countdown when display is true
+    useEffect(() => {
+        let timer;
+        if (display && timeLeft > 0) {
+            timer = setInterval(() => {
+                setTimeLeft((prevTime) => prevTime - 1);
+            }, 1000);
+        }
+
+        // Show alert when timer reaches 0
+        if (timeLeft === 0) {
+            clearInterval(timer);
+            Modal.confirm({
+                title: 'Time is up!',
+                content: 'You have spent the allocated time on this page. Please continue to the next page.',
+                okText: 'Proceed',
+                onOk: routeChange
+            });
+        }
+
+        // Cleanup the timer when component unmounts
+        return () => clearInterval(timer);
+    }, [display, timeLeft]);
+
+    // Format time (minutes and seconds)
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes}:${secs.toString().padStart(2, '0')}`;
+    };
+
     return (
       <div className="container">
         <h1>Feedback Presentation</h1> 
 
-        <div className="text"> 
-            (This is AI feedback.)
+        <div className="text" style={{fontSize: "22px"}}> 
+            The video on the left shows a recording of your practice. You can contrast with the videos from experts and
+            review the concepts that need more attention.
+        </div>
+
+        {/* Display countdown timer */}
+        <div style={{ fontSize: "20px", color: "#ff6633", margin: "10px 0" }}>
+            Time left to review: {formatTime(timeLeft)}
         </div>
 
         {display ? 
@@ -92,10 +136,11 @@ function AIFeedbackContainer() {
                 {/* Example: One instance of VideoPanel */}
                 <VideoPanel
                     title="Expert demonstration and explanation"
-                    singleVideoSrc="/video1.mp4"
+                    singleVideoSrc={selfVideoName}
                     middleVideos={[
-                    { src: videoRef1, caption: proxy1},
-                    { src: videoRef2, caption: proxy2}
+                    { src: `${baseVideoUrl}${videoRef1}`, caption: proxy1},
+                    { src: `${baseVideoUrl}${videoRef2}`, caption: proxy2},
+                    { src: `${baseVideoUrl}${videoRef3}`, caption: proxy3}
                     ]}
                 />
                 <div className="text"> 

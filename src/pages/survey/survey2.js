@@ -112,7 +112,7 @@ const Survey2Container = () => {
         <div className="title"> Questionnaire</div>
 
         <div className="text"> 
-            Please indicate your answer on a scale from 1 to 10 according to your suturing experience during Session 2.  
+            Please indicate your answer on a scale from 1 to 10 according to your suturing experience during <b>Session 2</b>.  
         </div>
 
         <Form.Item 
@@ -130,7 +130,7 @@ const Survey2Container = () => {
               }} 
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
         
@@ -149,7 +149,7 @@ const Survey2Container = () => {
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
-                tooltip={{ open: false }} // Hides tooltip to keep it clean
+                tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 
@@ -168,7 +168,7 @@ const Survey2Container = () => {
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
-                tooltip={{ open: false }} // Hides tooltip to keep it clean
+                tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 
@@ -187,7 +187,7 @@ const Survey2Container = () => {
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
-                tooltip={{ open: false }} // Hides tooltip to keep it clean
+                tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 
@@ -207,7 +207,7 @@ const Survey2Container = () => {
                 }} 
                 step={1} 
                 style={{ width: "60%", margin: "0 auto" }}
-                tooltip={{ open: false }} // Hides tooltip to keep it clean
+                tooltip={{ formatter: (value) => value }} // Hides tooltip to keep it clean
           />
       </Form.Item>
 

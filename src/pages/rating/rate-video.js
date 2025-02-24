@@ -34,7 +34,7 @@ const RateVideoContainer = () => {
   const [videoListLoading, setVideoListLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
   const [currentVideo, setCurrentVideo] = useState("");
-  const baseVideoUrl = "./participants/";
+  const baseVideoUrl = "./participants_clips/";
 
   useEffect(() => {
     console.log('getting videos')
@@ -85,8 +85,8 @@ const RateVideoContainer = () => {
       const nextIndex = currentVideoIndex + 1;
       setCurrentVideoIndex(nextIndex);
       setCurrentVideo(videoList[nextIndex]); 
-      console.log("Next video for rendering:", videoList[nextIndex]);  
       form.resetFields();
+      console.log("Next video for rendering:", videoList[nextIndex]);  
       window.scrollTo(0, 0);
     } else {
       let path = '/#/Demographics'; 
@@ -94,6 +94,18 @@ const RateVideoContainer = () => {
       window.scrollTo(0, 0);
     }
   };
+
+//   useEffect(() => {
+//     // Reset form to initial values when video changes
+//     form.resetFields();
+//     form.setFieldsValue({
+//         Q1: 1,
+//         Q2: 1,
+//         Q3: 1,
+//         Q4: 1,
+//         Q5: 1
+//     });
+// }, [currentVideo]);
 
   useEffect(() => {
     console.log("Updated currentVideo for rendering:", currentVideo);
@@ -263,6 +275,7 @@ const RateVideoContainer = () => {
         </div>
 
       <Form {...formItemLayout} layout='vertical'
+        form={form}
         name="validate_other"
         onFinish={onFinish}
         initialValues={{

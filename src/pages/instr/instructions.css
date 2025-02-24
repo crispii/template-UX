@@ -18,12 +18,25 @@
     margin-left: 13%;
 }
 
+.image-inner {
+    width: 25%;
+    height: 25%;
+  }
+
+.image-frame {
+    height: 400px;
+    width: 400px;
+    margin-left: 25%;
+    margin-top: -20px;
+}
+  
+
 .text{
-    font-size: 20px;
     /* margin-left: 5%;
     margin-right: 5%; */
-    margin-bottom: 5px;
-    text-align: left;
+    margin: 20px 0 20px 0;
+    text-align: center;
+    font-size: 30px;
 }
 
 .text ul, .text ol {
