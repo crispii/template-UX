@@ -34,21 +34,29 @@ const RateVideoContainer = () => {
   const [videoListLoading, setVideoListLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
   const [currentVideo, setCurrentVideo] = useState("");
-  const baseVideoUrl = "./";
+  const baseVideoUrl = "./participants/";
 
-  // useEffect(() => {
-  //   console.log('getting videos')
-  //   fetch("http://localhost:8080/get_videos")
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setVideoList(data['videos']);
-  //       setVideoListLoading(false);
-  //       let video_name = data['videos'][0].name;
-  //       setCurrentVideo(video_name);
-  //     })
-  //     .catch(error => console.error("Error fetching videos:", error));
-  //     setVideoListLoading(false);
-  // }, []);
+  useEffect(() => {
+    console.log('getting videos')
+    fetch("http://localhost:8080/get_videos", {
+        method: 'POST',
+        body: JSON.stringify({
+          user_id: localStorage.getItem("user-id"),
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }).then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setVideoList(data['videos']);
+        setVideoListLoading(false);
+        let video_name = data['videos'][0];
+        setCurrentVideo(video_name);
+      })
+      .catch(error => console.error("Error fetching videos:", error));
+      setVideoListLoading(false);
+  }, []);
 
 
   const onFinish = (values) => {
@@ -68,26 +76,49 @@ const RateVideoContainer = () => {
     sendData(data)
 
     if (currentVideoIndex < videoList.length - 1) {
-      setCurrentVideoIndex(currentVideoIndex + 1);
-      setCurrentVideo(videoList[currentVideoIndex].name);
+      console.log('updating video name')
+      // let video_name = videoList[currentVideoIndex + 1];
+      // console.log(video_name)
+      // setCurrentVideoIndex((prevIndex) => prevIndex + 1);
+      // setCurrentVideo(video_name);
+
+      const nextIndex = currentVideoIndex + 1;
+      setCurrentVideoIndex(nextIndex);
+      setCurrentVideo(videoList[nextIndex]); 
+      console.log("Next video for rendering:", videoList[nextIndex]);  
       form.resetFields();
+      window.scrollTo(0, 0);
     } else {
       let path = '/#/Demographics'; 
       window.location.assign(path);
+      window.scrollTo(0, 0);
     }
   };
 
+  useEffect(() => {
+    console.log("Updated currentVideo for rendering:", currentVideo);
+  }, [currentVideo]);
+
+  // useEffect(() => {
+  //   if (videoList.length > 0) {
+  //     setCurrentVideo(videoList[currentVideoIndex]);
+  //     console.log("Updated currentVideo:", videoList[currentVideoIndex]);
+  //     console.log(currentVideo)
+  //   }
+  // }, [currentVideoIndex, videoList]);
+
   const sendData = (obj) => {
 
-    const videoName = videoList[currentVideoIndex].name;
+    const videoName = videoList[currentVideoIndex];
+    const match = videoName.match(/trial\d+/);
+    
 
-    fetch('http://localhost:8080/surveyData', {
+    fetch('http://localhost:8080/osatsData', {
       method: 'POST',
       body: JSON.stringify({
         user_id: localStorage.getItem("user-id"),
         folder: 'OSATS_eval',
-        type: 'survey',
-        video_name: videoName,
+        video_trial: match[0],
         content: obj,
       }),
       headers: {
@@ -108,6 +139,106 @@ const RateVideoContainer = () => {
     setVideoLoading(true);  // Keep loading until the video can be retried or error is resolved
   };
 
+  const marks_q1 = {
+    1: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        1- Many unnecessary{"\n"}movements
+      </div>
+    ),
+    2: "2",
+    3: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        3-Efficient time and motion,{"\n"} but some unnecessary movements
+      </div>
+    ),
+    4: "4",
+    5: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center",width: "150px", margin: "0 auto"}}>
+        5-Clear economy of{"\n"}movement and{"\n"}maximum efficiency
+      </div>
+    )
+  };
+
+  const marks_q2 = {
+    1: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        1-Repeatedly makes tentative or{"\n"} awkward moves with instruments
+      </div>
+    ),
+    2: "2",
+    3: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        3-Competent use of instruments,{"\n"} but occasionally awkward
+      </div>
+    ),
+    4: "4",
+    5: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center",width: "150px", margin: "0 auto"}}>
+        5-Fluid movements
+      </div>
+    )
+  };
+
+  const marks_q3 = {
+    1: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        1-Frequently utilized {"\n"}inappropriate instrument 
+      </div>
+    ),
+    2: "2",
+    3: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        3-Generally used appropriate {"\n"}instruments
+      </div>
+    ),
+    4: "4",
+    5: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center",width: "150px", margin: "0 auto"}}>
+        5-Obviously familiar {"\n"}with instruments and their use
+      </div>
+    )
+  };
+
+  const marks_q4 = {
+    1: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        1-Awkward or unsure with {"\n"}poor knot typing and {"\n"}inability to maintain tension 
+      </div>
+    ),
+    2: "2",
+    3: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        3-Competent suturing with {"\n"}good knot placement and{"\n"} appropriate tension
+      </div>
+    ),
+    4: "4",
+    5: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center",width: "150px", margin: "0 auto"}}>
+        5-Excellent suture control with correct {"\n"}suture placement and tension
+      </div>
+    )
+  };
+
+  const marks_q5 = {
+    1: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        1-Frequently stopped operating {"\n"}and seemed unsure of next move
+      </div>
+    ),
+    2: "2",
+    3: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center" }}>
+        3-Demonstrated some forward {"\n"}planning and reasonable {"\n"}progression of procedure
+      </div>
+    ),
+    4: "4",
+    5: (
+      <div style={{ whiteSpace: "pre-wrap", textAlign: "center",width: "150px", margin: "0 auto"}}>
+        5-Obviously planned operation
+      </div>
+    )
+  };
+
 
   return (
     <div className="container"> 
@@ -117,6 +248,7 @@ const RateVideoContainer = () => {
           {videoLoading && <div className="loading-message">Loading video...</div>}
 
           <video
+            key={currentVideo}
             controls
             width="600"
             onLoadedData={() => setVideoLoading(false)}
@@ -124,7 +256,7 @@ const RateVideoContainer = () => {
             style={videoLoading ? { display: "none" } : {}}
           >
             <source
-            src={baseVideoUrl + currentVideo}
+            src={`${baseVideoUrl}${currentVideo}`} 
             type="video/mp4"
           />
           </video>
@@ -148,6 +280,8 @@ const RateVideoContainer = () => {
 
         <Form.Item 
             name="Q1" 
+            label={<p style={{ fontSize: "20px" }}>Time and motion</p>}
+            style={{ marginBottom: "50px" }}
             rules={[{
                     required: true,
                   },
@@ -155,19 +289,18 @@ const RateVideoContainer = () => {
             <Slider 
               min={1} 
               max={5} 
-              marks={{
-                1: "Many unnecessary movements",
-                3: "Efficient time and motion, but some unnecessary movements",
-                5: "Clear economy of movement and maximum efficiency",
-              }} 
-              step={1} 
+              step={1}
+              marks={marks_q1} 
               style={{ width: "60%", margin: "0 auto" }}
-              tooltip={{ open: false }} // Hides tooltip to keep it clean
+              tooltip={{formatter: (value) => value }} // Hides tooltip to keep it clean
             />
         </Form.Item>
 
+
         <Form.Item 
             name="Q2" 
+            label={<p style={{ fontSize: "20px" }}>Instrument Handling</p>}
+            style={{ marginBottom: "50px" }}
             rules={[{
                     required: true,
                   },
@@ -175,11 +308,7 @@ const RateVideoContainer = () => {
             <Slider 
               min={1} 
               max={5} 
-              marks={{
-                1: "Repeatedly makes tentative or awkward moves with instruments",
-                3: "Competent use of instruments, but occasionally awkward",
-                5: "Fluid movements",
-              }} 
+              marks={marks_q2}
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
               tooltip={{ open: false }} // Hides tooltip to keep it clean
@@ -188,6 +317,8 @@ const RateVideoContainer = () => {
 
         <Form.Item 
             name="Q3" 
+            label={<p style={{ fontSize: "20px" }}>Use of instruments</p>}
+            style={{ marginBottom: "50px" }}
             rules={[{
                     required: true,
                   },
@@ -195,11 +326,7 @@ const RateVideoContainer = () => {
             <Slider 
               min={1} 
               max={5} 
-              marks={{
-                1: "Frequently utilized inappropriate instrument",
-                3: "Generally used appropriate instruments",
-                5: "Obviously familiar with instruments and their use",
-              }} 
+              marks={marks_q3}
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
               tooltip={{ open: false }} // Hides tooltip to keep it clean
@@ -208,6 +335,8 @@ const RateVideoContainer = () => {
 
         <Form.Item 
             name="Q4" 
+            label={<p style={{ fontSize: "20px" }}>Suture handling</p>}
+            style={{ marginBottom: "50px" }}
             rules={[{
                     required: true,
                   },
@@ -215,11 +344,7 @@ const RateVideoContainer = () => {
             <Slider 
               min={1} 
               max={5} 
-              marks={{
-                1: "Awkward or unsure with poor knot typing and inability to maintain tension",
-                3: "Competent suturing with good knot placement and appropriate tension",
-                5: "Excellent suture control with correct suture placement and tension",
-              }} 
+              marks={marks_q4}
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
               tooltip={{ open: false }} // Hides tooltip to keep it clean
@@ -228,6 +353,8 @@ const RateVideoContainer = () => {
 
         <Form.Item 
             name="Q5" 
+            label={<p style={{ fontSize: "20px" }}>Flow of operation</p>}
+            style={{ marginBottom: "80px" }}
             rules={[{
                     required: true,
                   },
@@ -235,11 +362,7 @@ const RateVideoContainer = () => {
             <Slider 
               min={1} 
               max={5} 
-              marks={{
-                1: "Frequently stopped operating and seemed unsure of next move",
-                3: "Demonstrated some forward planning and reasonable progression of procedure",
-                5: "Obviously planned operation",
-              }} 
+              marks={marks_q5}
               step={1} 
               style={{ width: "60%", margin: "0 auto" }}
               tooltip={{ open: false }} // Hides tooltip to keep it clean

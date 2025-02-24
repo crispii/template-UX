@@ -4,6 +4,7 @@ import { HashRouter, Router, Switch, Route} from 'react-router-dom';
 
 import StartContainer from './pages/start/start';
 import InstructionsContainer from './pages/instr/instructions';
+import PrefaceContainer from "./pages/feedback/description-feedback";
 import AIPrefaceContainer from "./pages/feedback/ai-preface";
 import AIFeedbackContainer from "./pages/feedback/ai-feedback";
 import TraditionalFeedbackContainer from "./pages/feedback/traditional-feedback";
@@ -29,8 +30,7 @@ export default class Routes extends Component {
                     <Route path="/" exact component={StartContainer} />
                     <Route path="/Instructions" component={InstructionsContainer} />
                     <Route path="/Practice" component={PracticeContainer} />
-                    <Route path="/FeedbackA-Preface" component={AIPrefaceContainer} />
-                    <Route path="/FeedbackB-Preface" component={TraditionalPrefaceContainer} />
+                    <Route path="/Feedback-Preface" component={PrefaceContainer}/>
                     <Route path="/FeedbackA" component={AIFeedbackContainer} />
                     <Route path="/FeedbackB" component={TraditionalFeedbackContainer} />
                     <Route path="/Session1" component={Session1Container} />

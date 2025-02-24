@@ -1,0 +1,67 @@
+/* Main Container for Three Columns */
+.video-panel {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  /* Title for Each Column */
+  .column-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Left Column: Single Video */
+  .left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .single-video {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  /* Middle Column: Video + Text Pairs */
+  .middle-column {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Each Video + Text Pair */
+  .video-text-pair {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 5px 0;
+  }
+  
+  /* Video Size (Reduced Size) */
+  .middle-video {
+    width: 50%;
+    max-width: 300px;
+    border-radius: 8px;
+  }
+  
+  /* Text next to each video */
+  .video-caption {
+    width: 50%;
+    font-size: 16px;
+    color: #555;
+  }
+
+.middle-title {
+  text-align: left;
+  padding-left: 10px;
+  margin: 0;
+}

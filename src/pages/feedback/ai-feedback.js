@@ -3,28 +3,7 @@ import {Button, Modal, Checkbox} from 'antd'
 import "./feedback.css";
 
 
-// Reusable VideoPanel Component
-const VideoPanel = ({ videoSrc1, text1, videoSrc2, text2 }) => {
-    return (
-      <div className="video-panel">
-        <div className="video-container">
-          <video className="video" controls>
-            <source src={videoSrc1} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p className="video-text">{text1}</p>
-        </div>
-  
-        <div className="video-container">
-          <video className="video" controls>
-            <source src={videoSrc2} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p className="video-text">{text2}</p>
-        </div>
-      </div>
-    );
-  };
+import VideoPanel from '../../components/videopanel'
 
 function AIFeedbackContainer() {
 
@@ -55,6 +34,7 @@ function AIFeedbackContainer() {
         // }
         let path = '/#/Session2';
         window.location.assign(path);
+        window.scrollTo(0, 0);
         console.log('moving to session 2 page')
 
     }
@@ -74,56 +54,50 @@ function AIFeedbackContainer() {
     // }, []);
 
     useEffect(() => {
-        fetch('http://localhost:8080/load_outputs')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            console.log(data['result_sample']);
-            setProxy1(data['feedback'][0]['proxy_name'])
-            setVideoRef1(data['feedback'][0]['video_ref'])
-            console.log(videoRef1)
-            setProxy2(data['feedback'][1]['proxy_name'])
-            setVideoRef2(data['feedback'][1]['video_ref'])
-            setDisplay(true);
 
-        });
+            fetch('http://localhost:8080/load_outputs', {
+              method: 'POST',
+              body: JSON.stringify({
+                user_id: localStorage.getItem("user-id"),
+                trial_number: 1
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              }
+            }).then(response => response.json())
+              .then(data => {
+                console.log(data)
+                console.log(data['result_sample']);
+                setProxy1(data['feedback'][0]['proxy_name'])
+                setVideoRef1(data['feedback'][0]['video_ref'])
+                console.log(proxy1)
+                setProxy2(data['feedback'][1]['proxy_name'])
+                setVideoRef2(data['feedback'][1]['video_ref'])
+                setDisplay(true);
+    
+              })
+           
     }, []);
 
     return (
       <div className="container">
-        <h1>AI Feedback</h1> 
+        <h1>Feedback Presentation</h1> 
 
         <div className="text"> 
-            (This is AI feedback.) The next 2 pages will have 2 more trials to complete. 
+            (This is AI feedback.)
         </div>
 
         {display ? 
             <> 
-                {/* Column Titles */}
-                <div className="video-titles">
-                    <h3 className="video-title">Your video</h3>
-                    <h3 className="video-title">Expert Video</h3>
-                </div>
-
-                {/* Add Three VideoPanels */}
-                <div className="video-text"> 
-                    Proxy description here. {proxy1}
-                </div>
-                
+                {/* Example: One instance of VideoPanel */}
                 <VideoPanel
-                    videoSrc1="/video1.mp4"
-                    videoSrc2={videoRef1}
+                    title="Expert demonstration and explanation"
+                    singleVideoSrc="/video1.mp4"
+                    middleVideos={[
+                    { src: videoRef1, caption: proxy1},
+                    { src: videoRef2, caption: proxy2}
+                    ]}
                 />
-
-                <div className="video-text"> 
-                    Proxy description here. {proxy2}
-                </div>
-                <VideoPanel
-                    videoSrc1="/video1.mp4"
-                    videoSrc2={videoRef2}
-                />
-
-
                 <div className="text"> 
                     <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>
                     I am done viewing the feedback.

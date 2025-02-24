@@ -45,8 +45,26 @@ function AIPrefaceContainer() {
         <h1>Feedback Preface</h1> 
 
         <div className="text"> 
-            (The next page will be AI feedback.)
+            (AI feedback description here)
         </div>
+
+        
+        <p style={{textAlign: 'left', margin: '20px'}}>You will receive this feedback in the following sequence:</p>
+            First feedback presentation
+            <ol>
+                <li>We will show you specific feedback based on your performance in the initial trials</li>
+                <li>Take time to review and understand the feedback provided</li>
+                <li>Complete one practice trial incorporating what you learned</li>
+
+            </ol> 
+            Second feedback presentation
+            <ol>
+                <li>We will show you the same feedback again to reinforce the key points</li>
+                <li>This repetition helps ensure thorough understanding of the feedback</li>
+                <li>Complete a final trial applying the feedback</li>
+            </ol>
+
+
 
         <div className="text"> 
             <Checkbox onChange={checkboxHandler} style={{fontSize:"20px", textAlign: 'left', alignSelf: 'stretch'}}>

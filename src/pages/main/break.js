@@ -46,7 +46,7 @@ function BreakContainer() {
             console.log(data)
             if (data.success) {
                 if (data.status === 'completed') {
-                    console.log(`Trial ${trialNumber} completed with execution time: ${data.result.execution_time_seconds.toFixed(2)} seconds`);
+                    console.log(`Trial ${trialNumber} completed`);
                 }
                 // if the job is not completed
                 else if (data.status === 'failed') {
