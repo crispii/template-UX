@@ -37,7 +37,7 @@ const Survey2FeedbackContainer = () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched Task:', data);
-                setTask(Number(data.task_number));
+                // setTask(Number(data.task_number));
             })
             .catch(error => console.error('Error fetching task data:', error));
     }

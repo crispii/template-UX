@@ -37,7 +37,7 @@ const Survey2Container = () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched Task:', data);
-                setTask(Number(data.task_number)); // Set the task from the backend response
+                // setTask(Number(data.task_number)); // Set the task from the backend response
             })
             .catch(error => console.error('Error fetching task data:', error));
     }
@@ -72,6 +72,8 @@ const Survey2Container = () => {
     else {
       feedback = "_AI"
     }
+
+    console.log(feedback)
 
     fetch('http://localhost:8080/surveyData', {
       method: 'POST',

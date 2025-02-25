@@ -13,12 +13,15 @@ function PrefaceContainer() {
     }
 
     let feedback;
+    console.log(localStorage.getItem("task"))
 
     if (localStorage.getItem("task") == 1) {
+        console.log('assigning traditional')
         feedback = "traditional"
       }
     else {
-    feedback = "AI"
+        console.log('assigning intervention')
+        feedback = "AI"
     }
 
     const routeChange = () =>{ 

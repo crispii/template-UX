@@ -22,7 +22,7 @@ function RateVideoPrefaceContainer() {
         <h1>Rate Video Preface</h1> 
 
         <div className="text" style={{ fontSize: "20px" }}> 
-            On the next page, you will see two of your recordings and be asked to rate specific skills. 
+            On the next page, you will see two of your recordings and be asked to rate specific skills from the Objective Structured Assessment of Technical Skills (OSATS) global rating scale.
             
         </div>
         <div className="text" style={{ fontSize: "20px" }}> 

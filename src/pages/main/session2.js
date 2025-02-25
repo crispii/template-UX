@@ -27,8 +27,8 @@ function Session2Container() {
             window.location.assign(path);
         } else {
             console.log("Done with trials for session 2");
-            localStorage.removeItem("trialCount"); // Clear storage after completion
-            localStorage.removeItem("task"); // Clear storage after completion
+            // localStorage.removeItem("trialCount"); // Clear storage after completion
+            // localStorage.removeItem("task"); // Clear storage after completion
             let path = '/#/Survey2';
             window.location.assign(path);
         } 

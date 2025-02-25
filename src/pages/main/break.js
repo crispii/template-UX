@@ -115,7 +115,7 @@ function BreakContainer() {
         <h2 className="text" style={{ fontSize: "50px" }}>{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</h2>
 
         <div className="text" style={{ fontSize: "40px" }}> 
-            <Button disabled={!isButtonEnabled} variant="btn btn-success" onClick={routeChange}>
+            <Button variant="btn btn-success" onClick={routeChange}>
                 Next
             </Button>
         </div>

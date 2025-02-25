@@ -27,7 +27,7 @@ function InstructionsContainer() {
     }
 
     const instructions = [
-        { step: "Pass the needle through the material", details: "You will start by passing the needle through two opposing pieces of material. During this step, the dominant hand holds the needle driver and the non-dominant hand uses the forceps to extract the needle from the material." },
+        { step: "Pass the needle through the material", details: "You will start by passing the needle through two opposing pieces of material in one shot. During this step, the dominant hand holds the needle driver and the non-dominant hand uses the forceps to extract the needle from the material." },
         { step: "Pull the suture", details: "The non-dominant hand pulls the suture either using the forceps or empty." },
         { step: "Perform one surgeon knot and two finishing knots.", details: "The dominant hand has the needle driver, and the non-dominant hand may hold the forceps or be empty."},
         { step: "Cut the suture", details: "The suture is cut using the scissors which are held in the dominant hand. " }

@@ -145,7 +145,7 @@ const DemographicsContainer = () => {
                 ]}>
             <Radio.Group style={{ display: "flex", flexDirection: "column" }}>
                 <Radio value="1" style={{fontSize: "18px", marginLeft: "25px"}}>Pre-clinical </Radio>
-                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Clearkships </Radio>
+                <Radio value="2" style={{fontSize: "18px", marginLeft: "25px"}}>Clerkships </Radio>
                 <Radio value="3" style={{fontSize: "18px", marginLeft: "25px"}}>Residency preparation </Radio>
                 <Radio value="4" style={{fontSize: "18px", marginLeft: "25px"}}>Residency PY1-PY2 </Radio>
                 <Radio value="5" style={{fontSize: "18px", marginLeft: "25px"}}>Residency PY3-PY4 </Radio>
