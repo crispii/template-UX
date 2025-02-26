@@ -54,8 +54,8 @@ const Survey2FeedbackContainer = () => {
         q2: values.Q2,
         q3: values.Q3,
         q4: values.Q4,
-        q4: values.Q5,
-        q4: values.Q6,
+        q5: values.Q5,
+        q6: values.Q6,
     };
     sendData(data)
 
